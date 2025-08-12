@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nidhi & Darshan - Wedding RSVP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- ========================================== -->
+    <!-- 🖼️ REPLACE YOUR COUPLE'S PHOTO URL HERE  -->
+    <!-- ========================================== -->
+    <script>
+        // 👇 PASTE YOUR IMAGE URL BETWEEN THE QUOTES BELOW 👇
+        const COUPLE_PHOTO_URL = 'couple.JPG';
+        
+        // 📋 INSTRUCTIONS:
+        // 1. Upload your photo to imgur.com (free)
+        // 2. Right-click the image → "Copy image address"
+        // 3. Replace the URL above with your copied URL
+        // 4. Save and refresh the page
+        
+        // Example: const COUPLE_PHOTO_URL = 'https://i.imgur.com/ABC123.jpg';
+    </script>
+    <!-- ========================================== -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section - Background will be set dynamically */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(219, 112, 147, 0.75), rgba(255, 182, 193, 0.65)), url('') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .date {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero .location {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 2rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        /* RSVP Section */
+        .rsvp-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(255, 238, 248, 0.95), rgba(240, 248, 255, 0.95)), url('https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            padding: 5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .rsvp-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(1px);
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(219, 112, 147, 0.3);
+            overflow: hidden;
+            animation: slideInUp 1s ease-out;
+            position: relative;
+            z-index: 5;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .rsvp-header {
+            background: linear-gradient(135deg, #db7093, #ffb6c1);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .rsvp-header h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .rsvp-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .rsvp-form {
+            padding: 3rem 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #db7093;
+            box-shadow: 0 0 0 3px rgba(219, 112, 147, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .attendance-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-option .radio-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .radio-option input:checked + .radio-custom {
+            background: linear-gradient(135deg, #db7093, #ffb6c1);
+            border-color: #db7093;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(219, 112, 147, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #db7093, #ffb6c1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(219, 112, 147, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Floating Hearts Animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(219, 112, 147, 0.7);
+            animation: floatUp 6s linear infinite;
+        }
+
+        /* Floating Petals Animation */
+        .floating-petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 8;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 16px;
+            color: rgba(255, 182, 193, 0.6);
+            animation: petalFall 8s linear infinite;
+        }
+
+        /* Sparkles Animation */
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 12px;
+            color: rgba(255, 215, 0, 0.8);
+            animation: sparkleFloat 4s ease-in-out infinite;
+        }
+
+        /* Animated Background Particles */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        /* Pulse Effect for Hearts in Form */
+        .radio-option input:checked + .radio-custom i {
+            animation: heartPulse 1.5s ease-in-out infinite;
+        }
+
+        /* Shimmer Effect for Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #db7093, #ffb6c1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Glow Effect for Container */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(219, 112, 147, 0.3);
+            overflow: hidden;
+            animation: slideInUp 1s ease-out, containerGlow 4s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 5;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Enhanced Hero Title Animation */
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: nameReveal 2.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .hero h1 .name-first {
+            animation: slideInLeft 1.5s ease-out 0.5s forwards;
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        .hero h1 .heart-symbol {
+            animation: heartBounce 2s ease-out 1.5s forwards;
+            opacity: 0;
+            transform: scale(0);
+            display: inline-block;
+        }
+
+        .hero h1 .name-second {
+            animation: slideInRight 1.5s ease-out 2s forwards;
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        .hero .date {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 3s forwards;
+            transform: translateY(30px);
+        }
+
+        .hero .location {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 3.5s forwards;
+            transform: translateY(30px);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .date {
+                font-size: 1.2rem;
+            }
+
+            .hero .location {
+                font-size: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .attendance-options {
+                grid-template-columns: 1fr;
+            }
+
+            .rsvp-section {
+                padding: 2rem 1rem;
+            }
+
+            .rsvp-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) translateX(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(100px) rotate(180deg);
+            }
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+            }
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(0);
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) translateX(50px);
+            }
+        }
+
+        @keyframes heartPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+                color: #ff69b4;
+            }
+        }
+
+        @keyframes containerGlow {
+            0% {
+                box-shadow: 0 20px 60px rgba(219, 112, 147, 0.3);
+            }
+            100% {
+                box-shadow: 0 20px 60px rgba(219, 112, 147, 0.5);
+            }
+        }
+
+        @keyframes nameReveal {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes heartBounce {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            85% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <!-- Floating Petals -->
+    <div class="floating-petals" id="floatingPetals"></div>
+    <!-- Sparkles -->
+    <div class="sparkles" id="sparkles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="bg-particles" id="bgParticles"></div>
+        <div class="hero-content">
+            <h1>
+                <span class="name-first">Nidhi</span>
+                <span class="heart-symbol">♥</span>
+                <span class="name-second">Darshan</span>
+            </h1>
+            <div class="date">November 27, 2025 • 12:00 PM</div>
+            <div class="location">
+                📍 Palkhi Banquet, Vadodara<br>
+                Sama-Savli Rd, Vemali, Vadodara, Gujarat 390024, India
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="scrollToRSVP()">
+            ↓
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="rsvp-section" id="rsvp">
+        <div class="container">
+            <div class="rsvp-header">
+                <h2>RSVP</h2>
+                <p>We can't wait to celebrate with you! Please let us know if you'll be joining us on our special day.</p>
+            </div>
+            
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="success-message" id="successMessage">
+                    ✅ Thank you! Your RSVP has been submitted successfully.
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Will you be attending? *</label>
+                    <div class="attendance-options">
+                        <div class="radio-option">
+                            <input type="radio" id="attending-yes" name="attending" value="yes" required>
+                            <label for="attending-yes" class="radio-custom">
+                                <i>♥</i>&nbsp;&nbsp;Yes, I'll be there!
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="attending-no" name="attending" value="no" required>
+                            <label for="attending-no" class="radio-custom">
+                                <i>💔</i>&nbsp;&nbsp;Sorry, can't make it
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Number of Guests (including yourself) *</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Select number of guests</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6+</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Dietary Requirements or Special Requests</label>
+                    <textarea id="dietary" name="dietary" rows="3" placeholder="Please let us know about any dietary restrictions, allergies, or special requirements..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Special Message for the Couple</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Share your wishes, memories, or anything special you'd like to tell Nidhi and Darshan..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    ✈️&nbsp;&nbsp;Submit RSVP
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '♥';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            document.getElementById('floatingHearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Floating petals animation
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerHTML = '🌸';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            petal.style.opacity = Math.random() * 0.6 + 0.2;
+            document.getElementById('floatingPetals').appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 8000);
+        }
+
+        // Sparkles animation
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 4000);
+        }
+
+        // Background particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = particle.style.height = Math.random() * 8 + 4 + 'px';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.getElementById('bgParticles').appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 20000);
+        }
+
+        // Create animations periodically
+        setInterval(createHeart, 3000);
+        setInterval(createPetal, 4000);
+        setInterval(createSparkle, 2000);
+        setInterval(createParticle, 1000);
+
+        // Set the couple's photo as background
+        function setCouplePhoto() {
+            const heroSection = document.getElementById('hero');
+            if (COUPLE_PHOTO_URL && COUPLE_PHOTO_URL.trim() !== '') {
+                heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(219, 112, 147, 0.75), rgba(255, 182, 193, 0.65)), url('${COUPLE_PHOTO_URL}')`;
+                heroSection.style.backgroundSize = 'cover';
+                heroSection.style.backgroundPosition = 'center';
+                heroSection.style.backgroundRepeat = 'no-repeat';
+                console.log('✅ Couple photo loaded successfully!');
+            } else {
+                console.log('⚠️ No couple photo URL provided. Please add your image URL at the top of the code.');
+            }
+        }
+
+        // Call the function to set the image
+        setCouplePhoto();
+
+        // Load the couple image on page load
+        window.addEventListener('DOMContentLoaded', setCouplePhoto);
+
+        // Smooth scroll to RSVP section
+        function scrollToRSVP() {
+            document.getElementById('rsvp').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Form submission
+        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳&nbsp;&nbsp;Submitting...';
+            submitBtn.disabled = true;
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Add timestamp
+            data.timestamp = new Date().toLocaleString();
+
+            try {
+                // Google Apps Script Web App URL (you'll need to replace this with your actual deployment URL)
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbzOmCv0mqPP-fOB0Ni0sqFUBc4-BSqve13C3tRF8ebUq2eR3FpfsnVDDIHOmfzJhOMq/exec';
+                
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    this.reset();
+                    
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Create celebration hearts
+                    for (let i = 0; i < 10; i++) {
+                        setTimeout(createHeart, i * 200);
+                    }
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting your RSVP. Please try again or contact us directly.');
+            } finally {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Form validation enhancements
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+        });
+
+        // Parallax effect for hero section (removed to prevent overlap issues)
+        // window.addEventListener('scroll', function() {
+        //     const scrolled = window.pageYOffset;
+        //     const hero = document.getElementById('hero');
+        //     const parallax = scrolled * 0.5;
+        //     hero.style.transform = `translateY(${parallax}px)`;
+        // });
+    </script>
+</body>
+</html>
