@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <!-- Keep the correct mobile viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Darshan & Nidhi - A Love Beyond Words</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -32,23 +33,44 @@
       --title-g2: #ffd1e6;
       --title-g3: #ffe27a;
 
-      --hero-bg: url("couple.JPG");
+      --hero-bg: url("couple.jpg");
     }
 
+    /* ----- GLOBAL / MOBILE SAFETY FIXES ----- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
+    html,
+    body {
       height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* kill horizontal scroll */
+    img,
+    video,
+    svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* prevent overflow */
+    .clip-x {
+      overflow-x: hidden;
+    }
+
+    /* utility to keep sections from spilling */
+
+    html {
       overscroll-behavior-y: none;
     }
 
     body {
       font-family: "Inter", sans-serif;
-      overflow-x: hidden;
       color: var(--text-primary);
       min-height: calc(var(--vh, 1vh) * 100);
       background: var(--neutral-dark);
@@ -66,6 +88,7 @@
         radial-gradient(850px 650px at 25% 85%, rgba(93, 78, 117, 0.10), transparent 60%),
         linear-gradient(135deg, var(--neutral-dark), var(--accent), var(--primary-dark) 55%, var(--accent-light), var(--neutral-dark));
       background-attachment: fixed;
+      will-change: transform;
     }
 
     .page-overlay {
@@ -81,6 +104,7 @@
       inset: 0;
       z-index: -1;
       overflow: hidden;
+      /* ensure no x-scroll from floaters */
       pointer-events: none;
     }
 
@@ -276,6 +300,7 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(212, 175, 55, .25);
+      white-space: nowrap;
     }
 
     .explore-btn:hover {
@@ -312,6 +337,7 @@
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(139, 74, 107, .25);
       margin-top: 16px;
+      white-space: nowrap;
     }
 
     .directions-btn:hover {
@@ -489,6 +515,7 @@
       margin-top: 24px;
     }
 
+    /* ----- DESKTOP/TABLET PHOTO GRID ----- */
     .photo-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -531,7 +558,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
       filter: saturate(1.05) contrast(1.02);
       transition: all .6s ease;
     }
@@ -580,7 +606,7 @@
       opacity: 1;
     }
 
-    /* Lightbox with navigation */
+    /* ----- LIGHTBOX ----- */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -673,7 +699,7 @@
       text-align: center;
     }
 
-    /* RSVP */
+    /* ----- RSVP ----- */
     .rsvp-section {
       background: linear-gradient(135deg, rgba(139, 74, 107, .06) 0%, rgba(212, 175, 55, .04) 50%, rgba(93, 78, 117, .06) 100%);
       border-radius: 32px;
@@ -737,7 +763,6 @@
       line-height: 1.2;
     }
 
-    /* NEW: two-button toggle for attendance */
     .toggle-row {
       display: flex;
       gap: 10px;
@@ -827,9 +852,16 @@
       transform: translateY(0) scale(1);
     }
 
+    /* ----- NEW: MOBILE-ONLY CAROUSEL ----- */
+    .mobile-carousel {
+      display: none;
+    }
+
     @media (max-width: 768px) {
-      .main-title {
-        font-size: 3.2rem;
+
+      /* hide the big grid on phones */
+      #gallery {
+        display: none;
       }
 
       .section {
@@ -841,15 +873,89 @@
         padding: 36px 20px;
       }
 
-      .photo-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 16px;
-      }
-
       .toggle-btn {
         min-width: 110px;
         padding: 9px 12px;
         font-size: .9rem;
+      }
+
+      .mobile-carousel {
+        display: block;
+        margin: 24px auto 8px;
+        max-width: 520px;
+      }
+
+      .carousel-viewport {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        aspect-ratio: 4/5;
+        background: rgba(255, 255, 255, .04);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+      }
+
+      .carousel-track {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        will-change: transform;
+        transition: transform .5s ease;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        height: 100%;
+        flex: 0 0 100%;
+        position: relative;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .carousel-prev,
+      .carousel-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, .35);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+      }
+
+      .carousel-prev {
+        left: 8px;
+      }
+
+      .carousel-next {
+        right: 8px;
+      }
+
+      .carousel-dots {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        margin: 10px 0 0;
+      }
+
+      .carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, .35);
+      }
+
+      .carousel-dot.is-active {
+        background: var(--secondary);
       }
     }
 
@@ -878,7 +984,7 @@
   </style>
 </head>
 
-<body style="cursor:auto;">
+<body class="clip-x" style="cursor:auto;">
   <div class="scroll-progress">
     <div class="scroll-progress-bar"></div>
   </div>
@@ -893,16 +999,14 @@
       <h1 class="main-title">Darshan & Nidhi</h1>
       <p class="subtitle">Two Hearts, One Beautiful Journey</p>
       <div class="hero-cta">
-        <a href="#details" class="explore-btn cta-next" data-target="#details">
-          <span>View Wedding Details</span>
-          <i class="fas fa-heart"></i>
-        </a>
+        <a href="#details" class="explore-btn cta-next" data-target="#details"><span>View Wedding Details</span><i
+            class="fas fa-heart"></i></a>
       </div>
     </div>
   </section>
 
   <!-- Wedding Details -->
-  <section class="section" id="details">
+  <section class="section clip-x" id="details">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Wedding Ceremony</h2>
@@ -915,8 +1019,7 @@
         <div class="wedding-address">Vadodara, Gujarat, India</div>
         <a href="https://maps.google.com/?q=Palkhi%20Banquet%20Vadodara%20Gujarat%20India" target="_blank"
           rel="noopener" class="directions-btn">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Get Directions</span>
+          <i class="fas fa-map-marker-alt"></i><span>Get Directions</span>
         </a>
       </div>
 
@@ -930,7 +1033,7 @@
   </section>
 
   <!-- Love Story -->
-  <section class="section" id="story">
+  <section class="section clip-x" id="story">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Our Love Story</h2>
@@ -943,6 +1046,10 @@
           Darshan and Nidhi’s love story is two souls woven together in perfect harmony.
         </p>
 
+        <!-- NEW: Mobile-only carousel (auto-built by JS) -->
+        <div class="mobile-carousel" id="mobileCarousel" aria-label="Photo carousel" hidden></div>
+
+        <!-- Existing grid (auto-hidden on phones) -->
         <div class="photo-gallery" id="gallery">
           <div class="photo-card" data-tags="moments">
             <span class="badge">First Moments</span>
@@ -976,7 +1083,7 @@
 
           <div class="photo-card" data-tags="moments">
             <span class="badge">Together</span>
-            <img src="A-moment-of-pure-magic.JPG" alt="Engagement rings" />
+            <img src="A-moment-of-pure-magic.jpg" alt="Engagement rings" />
             <div class="photo-overlay"><strong>Engagement rings</strong></div>
           </div>
         </div>
@@ -985,7 +1092,7 @@
   </section>
 
   <!-- RSVP -->
-  <section class="section" id="rsvp">
+  <section class="section clip-x" id="rsvp">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">RSVP</h2>
@@ -995,7 +1102,6 @@
       <div class="rsvp-section">
         <form class="rsvp-form" id="rsvpForm">
           <div class="form-grid">
-            <!-- CHANGED: Split full name into first & last for consistency -->
             <div class="form-group">
               <label for="firstName">First Name *</label>
               <input type="text" id="firstName" name="firstName" class="form-input" required
@@ -1007,7 +1113,6 @@
                 placeholder="Enter last name" />
             </div>
 
-            <!-- NEW: Two-button attendance toggle -->
             <div class="form-group">
               <label>Are you attending? *</label>
               <div class="toggle-row" id="attendToggle" role="group" aria-label="Attendance">
@@ -1019,11 +1124,9 @@
 
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <!-- CHANGED: generic placeholder (no regional example) -->
               <input type="tel" id="phone" name="phone" class="form-input" placeholder="Phone number" />
             </div>
 
-            <!-- Guests only when attending = Yes -->
             <div class="form-group" id="guestsGroup">
               <label for="guests">Number of Guests *</label>
               <select id="guests" name="guests" class="form-input">
@@ -1051,7 +1154,6 @@
             <p>Your RSVP has been received! We can't wait to celebrate with you.</p>
           </div>
 
-          <!-- Hidden full name to keep your existing sheet columns compatible -->
           <input type="hidden" id="fullName" name="fullName" />
         </form>
       </div>
@@ -1186,32 +1288,20 @@
         guestsSelect.value = '';
       }
     }
-
-    // NEW: toggle buttons behavior
     attendToggle.addEventListener('click', (e) => {
       const btn = e.target.closest('.toggle-btn');
       if (!btn) return;
-      // set value
       attendingInput.value = btn.dataset.value;
-      // visual state
       attendToggle.querySelectorAll('.toggle-btn').forEach(b => { b.classList.toggle('is-active', b === btn); b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
       updateGuestsRequirement();
     });
-
-    // initialize state
     attendingInput.value = '';
     updateGuestsRequirement();
 
     rsvpForm.addEventListener('submit', async function (e) {
       e.preventDefault();
+      if (!attendingInput.value) { alert('Please let us know if you are attending.'); return; }
 
-      // validate attending selection
-      if (!attendingInput.value) {
-        alert('Please let us know if you are attending.');
-        return;
-      }
-
-      // keep your existing sheet compatible: compose fullName from first/last
       const first = (document.getElementById('firstName').value || '').trim();
       const last = (document.getElementById('lastName').value || '').trim();
       document.getElementById('fullName').value = [first, last].filter(Boolean).join(' ');
@@ -1267,6 +1357,9 @@
     /* ---------- Gallery + Lightbox navigation ---------- */
     const gallery = document.getElementById('gallery');
     const cards = [...gallery.querySelectorAll('.photo-card')];
+    // Lazy-load any grid images too
+    document.querySelectorAll('.photo-card img').forEach(img => img.setAttribute('loading', 'lazy'));
+
     const images = cards.map(card => ({
       src: card.querySelector('img').src,
       alt: card.querySelector('img').alt,
@@ -1283,7 +1376,7 @@
     let currentIndex = 0;
 
     function openLightbox(index) { currentIndex = index; updateLightbox(); lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    function updateLightbox() { const item = images[currentIndex]; lightboxImg.src = item.src.replace('w=1200', 'w=1600'); lightboxImg.alt = item.alt; lightboxCaption.textContent = item.caption; }
+    function updateLightbox() { const item = images[currentIndex]; lightboxImg.src = item.src; lightboxImg.alt = item.alt; lightboxCaption.textContent = item.caption; }
     function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
     function showPrev() { currentIndex = (currentIndex - 1 + images.length) % images.length; updateLightbox(); }
     function showNext() { currentIndex = (currentIndex + 1) % images.length; updateLightbox(); }
@@ -1320,6 +1413,89 @@
         }, index * 100);
       });
     });
+
+    /* ---------- NEW: Build mobile carousel from the same images ---------- */
+    (function initMobileCarousel() {
+      const mobileEl = document.getElementById('mobileCarousel');
+      if (!mobileEl) return;
+
+      function build() {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (!isMobile) { mobileEl.hidden = true; return; }
+        if (mobileEl.dataset.built === '1') { mobileEl.hidden = false; return; }
+
+        // Structure
+        const viewport = document.createElement('div'); viewport.className = 'carousel-viewport';
+        const track = document.createElement('div'); track.className = 'carousel-track';
+
+        images.forEach((item, i) => {
+          const slide = document.createElement('div'); slide.className = 'carousel-slide';
+          const img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.alt;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.addEventListener('click', () => openLightbox(i));
+          slide.appendChild(img);
+          track.appendChild(slide);
+        });
+
+        const prev = document.createElement('button'); prev.className = 'carousel-prev'; prev.setAttribute('aria-label', 'Previous');
+        prev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+        const next = document.createElement('button'); next.className = 'carousel-next'; next.setAttribute('aria-label', 'Next');
+        next.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+
+        viewport.appendChild(track); viewport.appendChild(prev); viewport.appendChild(next);
+
+        const dots = document.createElement('div'); dots.className = 'carousel-dots';
+        images.forEach((_, i) => {
+          const dot = document.createElement('button'); dot.className = 'carousel-dot'; dot.type = 'button'; dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          dots.appendChild(dot);
+        });
+
+        mobileEl.appendChild(viewport);
+        mobileEl.appendChild(dots);
+        mobileEl.hidden = false;
+        mobileEl.dataset.built = '1';
+
+        const dotEls = [...dots.children];
+        let idx = 0, timer = null;
+
+        function goTo(i) {
+          idx = (i + images.length) % images.length;
+          track.style.transform = `translateX(-${idx * 100}%)`;
+          dotEls.forEach((d, n) => d.classList.toggle('is-active', n === idx));
+        }
+        function nextSlide() { goTo(idx + 1); }
+        function prevSlide() { goTo(idx - 1); }
+
+        next.addEventListener('click', nextSlide);
+        prev.addEventListener('click', prevSlide);
+        dotEls.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+        // swipe
+        let startX = 0;
+        viewport.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+        viewport.addEventListener('touchend', (e) => {
+          const dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 40) dx > 0 ? prevSlide() : nextSlide();
+        }, { passive: true });
+
+        // autoplay
+        function start() { stop(); timer = setInterval(nextSlide, 4000); }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+        start();
+
+        // pause on interaction or tab hidden
+        [prev, next, viewport].forEach(el => el.addEventListener('pointerdown', stop));
+        document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+        goTo(0);
+      }
+
+      build();
+      window.addEventListener('resize', build);
+    })();
   </script>
 </body>
 
