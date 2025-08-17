@@ -8,7 +8,7 @@
   <title>Darshan & Nidhi’s Wedding Celebration</title>
   <!-- Force minimal/blank social preview -->
   <!-- Social sharing / preview control -->
-  <meta property="og:title" content="Darshan & Nidhi’s Wedding Invitation – RSVP Here" />
+  <meta property="og:title" content="Darshan & Nidhi - A Love Beyond Words" />
   <meta property="og:description"
     content="Join us to celebrate our wedding on 27th November 2025 at Palkhi Banquet, Vadodara." />
   <meta property="og:type" content="website" />
@@ -16,7 +16,7 @@
   <meta property="og:image" content="https://wedding-invite-mauve.vercel.app/couple.jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  
+
   <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Darshan & Nidhi - A Love Beyond Words" />
@@ -58,8 +58,9 @@
       padding: 0;
       box-sizing: border-box
     }
+
     /* Hide the inputs once submitted, but keep the success panel visible */
-   /* When submitted: hide inputs gracefully and reveal success text */
+    /* When submitted: hide inputs gracefully and reveal success text */
     .rsvp-form.submitted .form-grid,
     .rsvp-form.submitted .submit-btn {
       opacity: 0;
@@ -69,13 +70,21 @@
       overflow: hidden;
       transition: opacity .25s ease, visibility .25s ease, max-height .25s ease, margin .25s ease;
     }
+
     .rsvp-form.submitted .success-message {
       opacity: 1;
       visibility: visible;
     }
+
     /* Red heart only on the "View Wedding Details" CTA */
-    .explore-btn .fa-heart { color: #1f1b1d}          /* solid red */
-    .explore-btn:hover .fa-heart { filter: brightness(1.05); }
+    .explore-btn .fa-heart {
+      color: #1f1b1d
+    }
+
+    /* solid red */
+    .explore-btn:hover .fa-heart {
+      filter: brightness(1.05);
+    }
 
     /* Chrome / Edge / Safari */
     input:-webkit-autofill,
@@ -86,7 +95,8 @@
       /* Paint the same dark glass as your theme */
       box-shadow: 0 0 0 1000px rgba(255, 255, 255, .08) inset !important;
       border: 1px solid rgba(212, 175, 55, .2);
-      transition: background-color 99999s ease-out 0s; /* suppress flash */
+      transition: background-color 99999s ease-out 0s;
+      /* suppress flash */
     }
 
     /* Firefox */
@@ -805,10 +815,12 @@
 
     /* Success panel: reserve no space until shown, but fade in smoothly */
     .success-message {
-      display: block;           /* keep as block so it paints inside the card */
+      display: block;
+      /* keep as block so it paints inside the card */
       opacity: 0;
       visibility: hidden;
-      transform: none;          /* remove translate to avoid first-frame jump */
+      transform: none;
+      /* remove translate to avoid first-frame jump */
       transition: opacity .35s ease, visibility .35s ease;
       margin-top: 24px;
     }
@@ -1072,10 +1084,250 @@
         font-family: "Bodoni Moda", Georgia, "Times New Roman", serif
       }
     }
+
+    /* --- Fullscreen Invitation Video Overlay (no cropping box) --- */
+    .invite-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      display: none;
+      /* JS toggles */
+      background: #000;
+      /* true black to frame vertical video */
+    }
+
+    .invite-overlay.is-open {
+      display: block;
+    }
+
+    .invite-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* show entire vertical video */
+      background: #000;
+      /* fills any side bars */
+    }
+
+    /* Top-right control cluster */
+    .invite-controls {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .invite-ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      background: rgba(0, 0, 0, .45);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+
+    .invite-ctrl-btn:hover {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .invite-ctrl-btn i {
+      font-size: 16px;
+    }
+
+    /* Make the RSVP button pop with your gold accent */
+    .invite-ctrl-btn.primary {
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: var(--neutral-dark);
+      border-color: transparent;
+      box-shadow: 0 8px 22px rgba(212, 175, 55, .28);
+    }
+
+    @media (max-width: 480px) {
+      .invite-ctrl-btn {
+        height: 40px;
+        padding: 0 12px;
+      }
+
+      .invite-ctrl-btn span {
+        display: none;
+      }
+
+      /* show icons only on very small screens */
+    }
+
+    .invite-unmute {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, .5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 2;
+    }
+
+    /* Top-right control cluster: vertical stack */
+    .invite-controls {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      flex-direction: column;
+      /* ⟵ vertical */
+      align-items: flex-end;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .invite-ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      background: rgba(0, 0, 0, .45);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+
+    .invite-ctrl-btn:hover {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .invite-ctrl-btn i {
+      font-size: 16px;
+    }
+
+    /* RSVP highlight */
+    .invite-ctrl-btn.primary {
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: var(--neutral-dark);
+      border-color: transparent;
+      box-shadow: 0 8px 22px rgba(212, 175, 55, .28);
+    }
+
+    /* Active state for unmuted audio */
+    .invite-ctrl-btn.toggle.active {
+      background: rgba(255, 255, 255, .18);
+      border-color: rgba(255, 255, 255, .38);
+    }
+
+    @media (max-width: 480px) {
+      .invite-ctrl-btn {
+        height: 40px;
+        padding: 0 12px;
+      }
+
+      .invite-ctrl-btn span {
+        display: none;
+      }
+
+      /* icons only on very small screens */
+    }
+    /* Floating "Watch invite video" button */
+    .invite-watch-btn{
+      position: fixed;
+      /* respect iOS safe areas and give extra right padding/spacing */
+      top: max(14px, env(safe-area-inset-top) + 14px);
+      right: max(18px, env(safe-area-inset-right) + 18px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 44px;
+      padding: 0 18px;                 /* ⟵ a bit more breathing room */
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(0,0,0,.45);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      z-index: 10001;                  /* above page, below overlay when open */
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    }
+    .invite-watch-btn:hover{ background: rgba(255,255,255,.12); }
+
+    @media (max-width:480px){
+      .invite-watch-btn{
+        height: 42px;
+        padding: 0 14px;               /* slightly tighter on small screens */
+      }
+      .invite-watch-btn span{ display:none; }
+    }
+
+    /* Use the button as the transform origin for overlay animations */
+    .invite-overlay{
+      transform-origin: var(--inv-origin-x, 100%) var(--inv-origin-y, 0);
+      will-change: transform, opacity;
+    }
+
+  /* Overlay animation origin (set via CSS vars from JS) */
+  .invite-overlay{
+    transform-origin: var(--inv-origin-x, 100%) var(--inv-origin-y, 0);
+  }
+
   </style>
 </head>
 
 <body class="clip-x" style="cursor:auto;">
+  <!-- Opening invitation video -->
+  <!-- Fullscreen invitation video -->
+<button id="watchInviteBtn" class="invite-watch-btn" aria-label="Watch invite video">
+  <i class="fas fa-play" aria-hidden="true"></i><span>Watch invite video</span>
+</button>
+
+  <div class="invite-overlay" id="inviteOverlay" role="dialog" aria-modal="true" aria-label="Invitation video">
+<div class="invite-controls" aria-label="Video actions">
+  <!-- Close first -->
+  <button class="invite-ctrl-btn" id="inviteCloseBtn" aria-label="Close invitation video">
+    <i class="fas fa-times" aria-hidden="true"></i><span>Close</span>
+  </button>
+
+  <!-- RSVP second -->
+  <a href="#rsvp" class="invite-ctrl-btn primary" id="inviteRSVPBtn" role="button">
+    <i class="fas fa-envelope-open-text" aria-hidden="true"></i><span>RSVP</span>
+  </a>
+
+  <!-- Unmute third (toggle) -->
+  <button class="invite-ctrl-btn toggle" id="inviteSoundBtn" aria-label="Unmute video">
+    <i class="fas fa-volume-mute" aria-hidden="true"></i><span>Unmute</span>
+  </button>
+</div>
+
+
+    <!-- Keep your video just below this block -->
+    <video id="inviteVideo" class="invite-video" src="invite.mp4" playsinline muted autoplay controls preload="metadata"
+      poster="couple.jpeg">
+    </video>
+
+
+    <button class="invite-unmute" id="inviteUnmuteBtn" aria-label="Unmute video">
+      <i class="fas fa-volume-mute"></i>
+    </button>
+
+  </div>
+
+
   <div class="scroll-progress">
     <div class="scroll-progress-bar"></div>
   </div>
@@ -1337,80 +1589,80 @@
     attendingInput.value = ''; updateGuestsRequirement();
 
     rsvpForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
+      e.preventDefault();
 
-        // Require attending toggle
-        if (!attendingInput.value) {
-          alert('Please let us know if you are attending.');
-          return;
-        }
+      // Require attending toggle
+      if (!attendingInput.value) {
+        alert('Please let us know if you are attending.');
+        return;
+      }
 
-        // Compose full name
-        const first = (document.getElementById('firstName').value || '').trim();
-        const last = (document.getElementById('lastName').value || '').trim();
-        document.getElementById('fullName').value = [first, last].filter(Boolean).join(' ');
+      // Compose full name
+      const first = (document.getElementById('firstName').value || '').trim();
+      const last = (document.getElementById('lastName').value || '').trim();
+      document.getElementById('fullName').value = [first, last].filter(Boolean).join(' ');
 
-        // UI: disable button while sending
-        const submitBtn = document.querySelector('.submit-btn');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '⏳ Submitting...';
-        submitBtn.disabled = true;
+      // UI: disable button while sending
+      const submitBtn = document.querySelector('.submit-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '⏳ Submitting...';
+      submitBtn.disabled = true;
 
-        try {
-          // ---- SEND THE POST FIRST ----
-          const scriptURL = 'https://script.google.com/macros/s/AKfycbxHkzMlFNw5gc24yS2URoKRli10zicn4ls_vkQL2vGGCxYQyUDkP_ZV8MQHImvCMYpq/exec';
-          const data = Object.fromEntries(new FormData(this).entries());
-          data.timestamp = new Date().toISOString();
-          const body = new URLSearchParams(data).toString();
+      try {
+        // ---- SEND THE POST FIRST ----
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxHkzMlFNw5gc24yS2URoKRli10zicn4ls_vkQL2vGGCxYQyUDkP_ZV8MQHImvCMYpq/exec';
+        const data = Object.fromEntries(new FormData(this).entries());
+        data.timestamp = new Date().toISOString();
+        const body = new URLSearchParams(data).toString();
 
-          const res = await fetch(scriptURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-            body
-          });
+        const res = await fetch(scriptURL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body
+        });
 
-          if (!res.ok) throw new Error('Network response was not ok');
+        if (!res.ok) throw new Error('Network response was not ok');
 
-          // ---- SUCCESS UI ----
-          const successMessage = document.getElementById('successMessage'); // define once here
-          const isAttending = attendingInput.value === 'Yes';
+        // ---- SUCCESS UI ----
+        const successMessage = document.getElementById('successMessage'); // define once here
+        const isAttending = attendingInput.value === 'Yes';
 
-          successMessage.innerHTML = isAttending
-            ? `
+        successMessage.innerHTML = isAttending
+          ? `
         <h3>✨ Thank you!</h3>
         <p>We’re thrilled you’ll be celebrating with us!</p>
       `
-            : `
+          : `
         <h3>💛 We’ll miss you!</h3>
         <p>Thanks for letting us know. We’ll share the photos and a video highlight reel after the wedding—keep an eye on your inbox for the link.</p>
       `;
 
-          // Show message + hide form fields (CSS handles the hiding)
-          successMessage.style.display = 'block';
-          rsvpForm.classList.add('submitted');
-          requestAnimationFrame(() => successMessage.classList.add('show'));
+        // Show message + hide form fields (CSS handles the hiding)
+        successMessage.style.display = 'block';
+        rsvpForm.classList.add('submitted');
+        requestAnimationFrame(() => successMessage.classList.add('show'));
 
-          // Fun confetti hearts
-          for (let i = 0; i < 10; i++) setTimeout(() => createCelebrationHeart(), i * 200);
+        // Fun confetti hearts
+        for (let i = 0; i < 10; i++) setTimeout(() => createCelebrationHeart(), i * 200);
 
-          // Reset underlying fields for any future edit
-          this.reset();
-          attendingInput.value = '';
-          attendToggle.querySelectorAll('.toggle-btn').forEach(b => {
-            b.classList.remove('is-active');
-            b.setAttribute('aria-pressed', 'false');
-          });
-          updateGuestsRequirement();
+        // Reset underlying fields for any future edit
+        this.reset();
+        attendingInput.value = '';
+        attendToggle.querySelectorAll('.toggle-btn').forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        updateGuestsRequirement();
 
-        } catch (err) {
-          console.error(err);
-          alert('There was an error submitting your RSVP. Please try again or contact us directly.');
-        } finally {
-          // Restore button
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }
-      });
+      } catch (err) {
+        console.error(err);
+        alert('There was an error submitting your RSVP. Please try again or contact us directly.');
+      } finally {
+        // Restore button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
 
     function createCelebrationHeart() {
       const heart = document.createElement('div'); heart.innerHTML = '💖'; heart.style.position = 'fixed'; heart.style.left = Math.random() * 100 + 'vw'; heart.style.top = '100vh'; heart.style.fontSize = '2rem'; heart.style.zIndex = '10000'; heart.style.pointerEvents = 'none'; document.body.appendChild(heart);
@@ -1590,6 +1842,141 @@
       window.addEventListener('resize', build);
     })();
   </script>
+
+<script>
+  // ---------- Fullscreen Invitation Overlay (fixed) ----------
+  (function initInviteOverlay() {
+    const overlay = document.getElementById('inviteOverlay');
+    const rsvpBtn = document.getElementById('inviteRSVPBtn');
+    const closeBtn = document.getElementById('inviteCloseBtn');
+    const soundBtn = document.getElementById('inviteSoundBtn');
+    const video = document.getElementById('inviteVideo');
+    const unmuteBtn = document.getElementById('inviteUnmuteBtn');
+    const watchBtn = document.getElementById('watchInviteBtn');
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- Helpers ---
+    function setSoundUI() {
+      const isMuted = video.muted || video.volume === 0;
+      soundBtn.classList.toggle('active', !isMuted);
+      soundBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
+      soundBtn.innerHTML = isMuted
+        ? '<i class="fas fa-volume-mute" aria-hidden="true"></i><span>Unmute</span>'
+        : '<i class="fas fa-volume-up" aria-hidden="true"></i><span>Mute</span>';
+      unmuteBtn.innerHTML = isMuted
+        ? '<i class="fas fa-volume-mute"></i>'
+        : '<i class="fas fa-volume-up"></i>';
+    }
+
+    function setOverlayOriginFromButton(btn) {
+      // Transform origin at the button center (viewport space = overlay box)
+      const r = btn.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      overlay.style.setProperty('--inv-origin-x', cx + 'px');
+      overlay.style.setProperty('--inv-origin-y', cy + 'px');
+    }
+
+    async function animateOverlay(opening, fromBtn) {
+      if (prefersReduced) {
+        overlay.classList.toggle('is-open', opening);
+        return;
+      }
+      if (fromBtn) setOverlayOriginFromButton(fromBtn);
+
+      if (opening) {
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'scale(0.86)';        // smaller start = clearer “from button”
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        await overlay.animate(
+          [{ opacity: 0, transform: 'scale(0.86)' },
+          { opacity: 1, transform: 'scale(1)' }],
+          { duration: 320, easing: 'cubic-bezier(.2,.8,.2,1)' }
+        ).finished;
+      } else {
+        // collapse back into the button
+        overlay.style.opacity = '1';
+        overlay.style.transform = 'scale(1)';
+        await overlay.animate(
+          [{ opacity: 1, transform: 'scale(1)' },
+          { opacity: 0, transform: 'scale(0.86)' }],
+          { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }
+        ).finished;
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      overlay.style.opacity = '';
+      overlay.style.transform = '';
+    }
+
+    // Open/close should ALWAYS reference the launcher button for origin
+    async function openOverlay(fromBtn) {
+      await animateOverlay(true, fromBtn || watchBtn);
+      try { video.currentTime = 0; } catch { }
+      try { await video.play(); } catch { }
+      watchBtn.style.display = 'none';
+    }
+
+    async function closeOverlay({ scrollTo = null } = {}) {
+      try { video.pause(); } catch { }
+      await animateOverlay(false, watchBtn);
+      if (scrollTo) {
+        const el = document.querySelector(scrollTo);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      watchBtn.style.display = '';
+    }
+
+    // --- Wire up sound toggles ---
+    soundBtn.addEventListener('click', async () => {
+      video.muted = !video.muted;
+      setSoundUI();
+      if (!video.muted) {
+        try { await video.play(); } catch { }
+      }
+    });
+
+    unmuteBtn.addEventListener('click', async () => {
+      video.muted = !video.muted;
+      setSoundUI();
+      if (!video.muted) {
+        try { await video.play(); } catch { }
+      }
+    });
+
+    video.addEventListener('volumechange', setSoundUI);
+    video.addEventListener('loadedmetadata', setSoundUI);
+
+    // --- Controls ---
+    closeBtn.addEventListener('click', () => closeOverlay());
+    rsvpBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeOverlay({ scrollTo: '#rsvp' });
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeOverlay();
+    });
+    video.addEventListener('ended', () => {
+      // When video ends, close and show the launcher button  
+      closeOverlay();
+    });
+
+    // Floating watch button
+    watchBtn.addEventListener('click', () => openOverlay(watchBtn));
+
+    // --- Open overlay on EVERY refresh (no localStorage gating) ---
+    // If you still want to suppress auto-open for people who *just* closed it, comment this line:
+    openOverlay(watchBtn);
+
+    // Initial UI sync
+    setSoundUI();
+  })();
+</script>
+
+
+
 </body>
 
 </html>
