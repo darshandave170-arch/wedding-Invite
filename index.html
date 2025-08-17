@@ -40,6 +40,60 @@
       padding: 0;
       box-sizing: border-box
     }
+    /* Hide the inputs once submitted, but keep the success panel visible */
+   /* When submitted: hide inputs gracefully and reveal success text */
+    .rsvp-form.submitted .form-grid,
+    .rsvp-form.submitted .submit-btn {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0;
+      margin: 0;
+      overflow: hidden;
+      transition: opacity .25s ease, visibility .25s ease, max-height .25s ease, margin .25s ease;
+    }
+    .rsvp-form.submitted .success-message {
+      opacity: 1;
+      visibility: visible;
+    }
+    /* Red heart only on the "View Wedding Details" CTA */
+    .explore-btn .fa-heart { color: #1f1b1d}          /* solid red */
+    .explore-btn:hover .fa-heart { filter: brightness(1.05); }
+
+    /* Chrome / Edge / Safari */
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+      -webkit-text-fill-color: var(--text-primary);
+      caret-color: var(--text-primary);
+      /* Paint the same dark glass as your theme */
+      box-shadow: 0 0 0 1000px rgba(255, 255, 255, .08) inset !important;
+      border: 1px solid rgba(212, 175, 55, .2);
+      transition: background-color 99999s ease-out 0s; /* suppress flash */
+    }
+
+    /* Firefox */
+    input:-moz-autofill,
+    textarea:-moz-autofill,
+    select:-moz-autofill {
+      -moz-text-fill-color: var(--text-primary);
+      caret-color: var(--text-primary);
+      box-shadow: 0 0 0 1000px rgba(255, 255, 255, .08) inset !important;
+      border: 1px solid rgba(212, 175, 55, .2);
+    }
+
+    /* Keep focus state consistent even when autofilled */
+    .form-input:focus,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill:focus,
+    input:-moz-autofill:focus,
+    textarea:-moz-autofill:focus,
+    select:-moz-autofill:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, .1), 0 0 0 1000px rgba(255, 255, 255, .12) inset !important;
+      background: rgba(255, 255, 255, .12);
+    }
+
 
     html,
     body {
@@ -731,18 +785,14 @@
       cursor: not-allowed;
     }
 
-    /* Success Message - Initially Hidden */
+    /* Success panel: reserve no space until shown, but fade in smoothly */
     .success-message {
-      display: none;
-      text-align: center;
-      padding: 32px;
-      background: linear-gradient(135deg, rgba(154, 212, 176, .1), rgba(109, 179, 137, .1));
-      border: 1px solid rgba(154, 212, 176, .3);
-      border-radius: 16px;
-      margin-top: 24px;
+      display: block;           /* keep as block so it paints inside the card */
       opacity: 0;
-      transform: translateY(20px);
-      transition: all .6s ease;
+      visibility: hidden;
+      transform: none;          /* remove translate to avoid first-frame jump */
+      transition: opacity .35s ease, visibility .35s ease;
+      margin-top: 24px;
     }
 
     .success-message.show {
@@ -1076,7 +1126,7 @@
         <div class="photo-gallery" id="gallery">
           <div class="photo-card" data-tags="moments">
             <span class="badge">First Moments</span>
-            <img src="Where-it-all began.jpeg" alt="Where it all began" />
+            <img src="Where-it-all-began.jpeg" alt="Where it all began" />
             <div class="photo-overlay"><strong>Where it all began</strong></div>
           </div>
 
@@ -1173,10 +1223,7 @@
 
           <button type="submit" class="submit-btn"><span class="btn-text">Send RSVP with Love</span></button>
 
-          <div class="success-message" id="successMessage">
-            <h3>✨ Thank You! ✨</h3>
-            <p>Your RSVP has been received! We can't wait to celebrate with you.</p>
-          </div>
+          <div class="success-message" id="successMessage" role="status" aria-live="polite"></div>
 
           <input type="hidden" id="fullName" name="fullName" />
         </form>
@@ -1272,27 +1319,80 @@
     attendingInput.value = ''; updateGuestsRequirement();
 
     rsvpForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      if (!attendingInput.value) { alert('Please let us know if you are attending.'); return; }
-      const first = (document.getElementById('firstName').value || '').trim();
-      const last = (document.getElementById('lastName').value || '').trim();
-      document.getElementById('fullName').value = [first, last].filter(Boolean).join(' ');
-      const submitBtn = document.querySelector('.submit-btn'); const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '⏳ Submitting...'; submitBtn.disabled = true;
-      try {
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxHkzMlFNw5gc24yS2URoKRli10zicn4ls_vkQL2vGGCxYQyUDkP_ZV8MQHImvCMYpq/exec';
-        const data = Object.fromEntries(new FormData(this).entries()); data.timestamp = new Date().toISOString();
-        const body = new URLSearchParams(data).toString();
-        const res = await fetch(scriptURL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }, body });
-        if (!res.ok) throw new Error('Network response was not ok');
-        const successMessage = document.getElementById('successMessage');
-        successMessage.style.display = 'block';
-        setTimeout(() => successMessage.classList.add('show'), 100);
-        this.reset(); attendingInput.value = ''; attendToggle.querySelectorAll('.toggle-btn').forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-pressed', 'false') }); updateGuestsRequirement();
-        successMessage.scrollIntoView({ behavior: 'smooth' }); for (let i = 0; i < 10; i++) setTimeout(() => createCelebrationHeart(), i * 200);
-      } catch (err) { console.error(err); alert('There was an error submitting your RSVP. Please try again or contact us directly.') }
-      finally { submitBtn.innerHTML = originalText; submitBtn.disabled = false; }
-    });
+        e.preventDefault();
+
+        // Require attending toggle
+        if (!attendingInput.value) {
+          alert('Please let us know if you are attending.');
+          return;
+        }
+
+        // Compose full name
+        const first = (document.getElementById('firstName').value || '').trim();
+        const last = (document.getElementById('lastName').value || '').trim();
+        document.getElementById('fullName').value = [first, last].filter(Boolean).join(' ');
+
+        // UI: disable button while sending
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '⏳ Submitting...';
+        submitBtn.disabled = true;
+
+        try {
+          // ---- SEND THE POST FIRST ----
+          const scriptURL = 'https://script.google.com/macros/s/AKfycbxHkzMlFNw5gc24yS2URoKRli10zicn4ls_vkQL2vGGCxYQyUDkP_ZV8MQHImvCMYpq/exec';
+          const data = Object.fromEntries(new FormData(this).entries());
+          data.timestamp = new Date().toISOString();
+          const body = new URLSearchParams(data).toString();
+
+          const res = await fetch(scriptURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+            body
+          });
+
+          if (!res.ok) throw new Error('Network response was not ok');
+
+          // ---- SUCCESS UI ----
+          const successMessage = document.getElementById('successMessage'); // define once here
+          const isAttending = attendingInput.value === 'Yes';
+
+          successMessage.innerHTML = isAttending
+            ? `
+        <h3>✨ Thank you!</h3>
+        <p>We’re thrilled you’ll be celebrating with us!</p>
+      `
+            : `
+        <h3>💛 We’ll miss you!</h3>
+        <p>Thanks for letting us know. We’ll share the photos and a video highlight reel after the wedding—keep an eye on your inbox for the link.</p>
+      `;
+
+          // Show message + hide form fields (CSS handles the hiding)
+          successMessage.style.display = 'block';
+          rsvpForm.classList.add('submitted');
+          requestAnimationFrame(() => successMessage.classList.add('show'));
+
+          // Fun confetti hearts
+          for (let i = 0; i < 10; i++) setTimeout(() => createCelebrationHeart(), i * 200);
+
+          // Reset underlying fields for any future edit
+          this.reset();
+          attendingInput.value = '';
+          attendToggle.querySelectorAll('.toggle-btn').forEach(b => {
+            b.classList.remove('is-active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          updateGuestsRequirement();
+
+        } catch (err) {
+          console.error(err);
+          alert('There was an error submitting your RSVP. Please try again or contact us directly.');
+        } finally {
+          // Restore button
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }
+      });
 
     function createCelebrationHeart() {
       const heart = document.createElement('div'); heart.innerHTML = '💖'; heart.style.position = 'fixed'; heart.style.left = Math.random() * 100 + 'vw'; heart.style.top = '100vh'; heart.style.fontSize = '2rem'; heart.style.zIndex = '10000'; heart.style.pointerEvents = 'none'; document.body.appendChild(heart);
