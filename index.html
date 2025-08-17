@@ -52,6 +52,166 @@
       --hero-bg: url("couple.jpeg");
     }
 
+    /* === Unified Overlay Controls === */
+:root{
+  --ctrl-h: 44px;
+  --ctrl-pad-x: 14px;
+  --ctrl-gap: 8px;
+  --ctrl-bg: rgba(0,0,0,.45);
+  --ctrl-bg-hover: rgba(255,255,255,.12);
+  --ctrl-border: rgba(255,255,255,.28);
+  --ctrl-ring: rgba(212,175,55,.38); /* gold-ish focus ring */
+  --ctrl-shadow: 0 8px 22px rgba(0,0,0,.28);
+  --ctrl-fz: 14px;
+  --ctrl-ico: 16px;
+}
+
+/* Container stays vertical stack on the top-right */
+.invite-controls{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 1;
+}
+
+/* Base pill */
+.invite-ctrl-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ctrl-gap);
+  height: var(--ctrl-h);
+  padding: 0 var(--ctrl-pad-x);
+  border-radius: 999px;
+  border: 1px solid var(--ctrl-border);
+  background: var(--ctrl-bg);
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--ctrl-fz);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--ctrl-shadow);
+  transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease, border-color .15s ease;
+  text-decoration: none; /* for <a> RSVP */
+}
+
+.invite-ctrl-btn:hover{
+  background: var(--ctrl-bg-hover);
+  transform: translateY(-1px);
+}
+.invite-ctrl-btn:active{
+  transform: translateY(0);
+}
+.invite-ctrl-btn:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,.4),
+    0 0 0 4px var(--ctrl-ring);
+}
+
+/* Icon sizing & alignment */
+.invite-ctrl-btn i{
+  width: 1.1em;
+  height: 1.1em;
+  font-size: var(--ctrl-ico);
+  line-height: 1;
+  display: inline-grid;
+  place-items: center;
+}
+
+/* Primary style (RSVP) */
+.invite-ctrl-btn.primary{
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+  border-color: transparent;
+  color: var(--neutral-dark);
+  box-shadow: 0 8px 22px rgba(212,175,55,.28);
+}
+.invite-ctrl-btn.primary:hover{
+  filter: brightness(1.02);
+}
+
+/* Toggle active look (Mute when sound ON) */
+.invite-ctrl-btn.toggle.active{
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.38);
+}
+
+/* Make labels auto-hide on very small screens */
+@media (max-width:480px){
+  .invite-ctrl-btn{ height: 40px; }
+  .invite-ctrl-btn span{ display:none; }
+}
+
+/* Consistent styling for overlay controls (all the pills look the same) */
+.invite-overlay .invite-ctrl-btn {
+  background: var(--ctrl-bg);
+  border-color: var(--ctrl-border);
+  color: #fff;
+  box-shadow: var(--ctrl-shadow);
+}
+.invite-overlay .invite-ctrl-btn:hover{
+  background: var(--ctrl-bg-hover);
+}
+
+/* Temporarily hide the bottom-right quick unmute button */
+.invite-unmute { display: none !important; }
+
+/* Ensure the overlay's "RSVP" pill doesn't use the gold gradient */
+.invite-overlay .invite-ctrl-btn.primary{
+  background: var(--ctrl-bg);
+  border-color: var(--ctrl-border);
+  color: #fff;
+  box-shadow: var(--ctrl-shadow);
+}
+
+/* === Quick Unmute FAB (bottom-right) — now visually consistent === */
+.invite-unmute{
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  /* inherit the same pill visuals */
+  height: var(--ctrl-h);
+  padding: 0 var(--ctrl-pad-x);
+  border-radius: 999px;
+  border: 1px solid var(--ctrl-border);
+  background: var(--ctrl-bg);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ctrl-gap);
+  box-shadow: var(--ctrl-shadow);
+  backdrop-filter: blur(6px);
+  transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease, border-color .15s ease;
+  font-weight: 700;
+}
+.invite-unmute i{
+  width: 1.1em;
+  height: 1.1em;
+  font-size: var(--ctrl-ico);
+  line-height: 1;
+  display: inline-grid;
+  place-items: center;
+}
+.invite-unmute:hover{ background: var(--ctrl-bg-hover); transform: translateY(-1px); }
+.invite-unmute:active{ transform: translateY(0); }
+.invite-unmute:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,.4),
+    0 0 0 4px var(--ctrl-ring);
+}
+
+/* Optional: hide the bottom-right quick button on very small screens */
+@media (max-width:480px){
+  .invite-unmute{ height: 40px; }
+}
+
     /* Global/mobile safety */
     * {
       margin: 0;
@@ -1121,20 +1281,6 @@
       z-index: 1;
     }
 
-    .invite-ctrl-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      height: 42px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, .28);
-      background: rgba(0, 0, 0, .45);
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-    }
 
     .invite-ctrl-btn:hover {
       background: rgba(255, 255, 255, .12);
@@ -1163,23 +1309,6 @@
       }
 
       /* show icons only on very small screens */
-    }
-
-    .invite-unmute {
-      position: absolute;
-      bottom: 16px;
-      right: 16px;
-      background: rgba(0, 0, 0, .5);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      font-size: 20px;
-      z-index: 2;
     }
 
     /* Top-right control cluster: vertical stack */
@@ -1218,19 +1347,6 @@
       font-size: 16px;
     }
 
-    /* RSVP highlight */
-    .invite-ctrl-btn.primary {
-      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-      color: var(--neutral-dark);
-      border-color: transparent;
-      box-shadow: 0 8px 22px rgba(212, 175, 55, .28);
-    }
-
-    /* Active state for unmuted audio */
-    .invite-ctrl-btn.toggle.active {
-      background: rgba(255, 255, 255, .18);
-      border-color: rgba(255, 255, 255, .38);
-    }
 
     @media (max-width: 480px) {
       .invite-ctrl-btn {
@@ -1343,7 +1459,12 @@
       <p class="subtitle">Two Hearts, One Beautiful Journey</p>
       <div class="hero-cta">
         <a href="#details" class="explore-btn cta-next" data-target="#details"><span>View Wedding Details</span><i
-            class="fas fa-heart"></i></a>
+            class="fas fa-heart"></i>
+        </a>
+        <!-- New RSVP CTA on the first screen -->
+        <a href="#rsvp" class="explore-btn cta-next" data-target="#rsvp" aria-label="RSVP">
+          <span>RSVP</span><i class="fas fa-envelope-open-text"></i>
+        </a>
       </div>
     </div>
   </section>
@@ -1691,12 +1812,20 @@
     let currentIndex = 0;
     const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
-    function openLightbox(index) {
+  function openLightbox(index) {
       if (isMobile()) return; // **Disable opening single photo on mobile**
-      currentIndex = index; updateLightbox(); lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
+      currentIndex = index;
+      updateLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.dispatchEvent(new CustomEvent('lightbox:open'));
     }
     function updateLightbox() { const item = images[currentIndex]; lightboxImg.src = item.src; lightboxImg.alt = item.alt; lightboxCaption.textContent = item.caption }
-    function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = '' }
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        document.dispatchEvent(new CustomEvent('lightbox:close'));
+      }
     function showPrev() { currentIndex = (currentIndex - 1 + images.length) % images.length; updateLightbox() }
     function showNext() { currentIndex = (currentIndex + 1) % images.length; updateLightbox() }
 
@@ -1864,9 +1993,12 @@
       soundBtn.innerHTML = isMuted
         ? '<i class="fas fa-volume-mute" aria-hidden="true"></i><span>Unmute</span>'
         : '<i class="fas fa-volume-up" aria-hidden="true"></i><span>Mute</span>';
+
+      // bottom-right quick button
+      unmuteBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
       unmuteBtn.innerHTML = isMuted
-        ? '<i class="fas fa-volume-mute"></i>'
-        : '<i class="fas fa-volume-up"></i>';
+        ? '<i class="fas fa-volume-mute"></i><span style="margin-left:6px;">Sound</span>'
+        : '<i class="fas fa-volume-up"></i><span style="margin-left:6px;">Sound</span>';
     }
 
     function setOverlayOriginFromButton(btn) {
@@ -1922,6 +2054,10 @@
     async function closeOverlay({ scrollTo = null } = {}) {
       try { video.pause(); } catch { }
       await animateOverlay(false, watchBtn);
+
+      // Mark as seen on any manual close too
+      try { localStorage.setItem(HAS_SEEN_KEY, '1'); } catch { }
+
       if (scrollTo) {
         const el = document.querySelector(scrollTo);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1966,17 +2102,46 @@
     // Floating watch button
     watchBtn.addEventListener('click', () => openOverlay(watchBtn));
 
-    // --- Open overlay on EVERY refresh (no localStorage gating) ---
-    // If you still want to suppress auto-open for people who *just* closed it, comment this line:
-    openOverlay(watchBtn);
+    // --- Open overlay ONLY on the first visit ---
+    let autoOpened = false;
+    const HAS_SEEN_KEY = 'inviteSeen';
+
+    try {
+      const hasSeen = localStorage.getItem(HAS_SEEN_KEY) === '1';
+      if (!hasSeen) {
+        autoOpened = true;
+        // open once, then remember so the next refresh won't auto-play
+        openOverlay(watchBtn).then(() => {
+          try { localStorage.setItem(HAS_SEEN_KEY, '1'); } catch { }
+        });
+      } else {
+        // ensure the launcher is visible if they’ve already seen it
+        watchBtn.style.display = '';
+      }
+    } catch {
+      // If localStorage is unavailable, just behave like "seen"
+      watchBtn.style.display = '';
+    }
+
+    // Hide/show the floating "Watch invite video" button if the gallery lightbox is open on desktop
+    const isDesktop = () => !window.matchMedia('(max-width: 768px)').matches;
+
+    document.addEventListener('lightbox:open', () => {
+      if (isDesktop()) watchBtn.style.display = 'none';
+    });
+
+    document.addEventListener('lightbox:close', () => {
+      if (isDesktop()) {
+        // Only show it back if the invite overlay itself isn't open
+        const overlayOpen = document.getElementById('inviteOverlay')?.classList.contains('is-open');
+        watchBtn.style.display = overlayOpen ? 'none' : '';
+      }
+    });
 
     // Initial UI sync
     setSoundUI();
   })();
+
 </script>
-
-
-
 </body>
-
 </html>
