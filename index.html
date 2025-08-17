@@ -870,7 +870,7 @@
           submitBtn.disabled = true;
         
           try {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbw7-c4yP0NQ200-hzr7IWGz7bJEQGORk-yFRLO6eb3EoLqgucam94_-wWNUJQUD-lI/exec';
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxf8ePipmlbE8cUYdZ6ZxqjXgbwFKX7MCKB9UGWIh-0KYQuB5f6E68OmWS8Ka_IUoIg/exec';
         
             // Collect form data -> plain object
             const data = Object.fromEntries(new FormData(this).entries());
@@ -900,6 +900,66 @@
             submitBtn.disabled = false;
           }
         });
+
+        //version old
+
+            //     document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+            // e.preventDefault();
+            
+            // // Show loading state
+            // const submitBtn = document.querySelector('.submit-btn');
+            // const originalText = submitBtn.innerHTML;
+            // submitBtn.innerHTML = '⏳&nbsp;&nbsp;Submitting...';
+            // submitBtn.disabled = true;
+
+            // // Collect form data
+            // const formData = new FormData(this);
+            // const data = {};
+            // for (let [key, value] of formData.entries()) {
+            //     data[key] = value;
+            // }
+            
+            // // Add timestamp
+            // data.timestamp = new Date().toLocaleString();
+
+            // try {
+            //     // Google Apps Script Web App URL (you'll need to replace this with your actual deployment URL)
+            //     const scriptURL = 'https://script.google.com/macros/s/AKfycbxf8ePipmlbE8cUYdZ6ZxqjXgbwFKX7MCKB9UGWIh-0KYQuB5f6E68OmWS8Ka_IUoIg/exec';
+                
+            //     const response = await fetch(scriptURL, {
+            //         method: 'POST',
+            //         mode: 'cors',
+            //         headers: {
+            //             'Content-Type': 'application/x-www-form-urlencoded',
+            //         },
+            //         body: JSON.stringify(data)
+            //     });
+
+            //     if (response.ok) {
+            //         // Show success message
+            //         document.getElementById('successMessage').style.display = 'block';
+            //         this.reset();
+                    
+            //         // Scroll to success message
+            //         document.getElementById('successMessage').scrollIntoView({
+            //             behavior: 'smooth'
+            //         });
+                    
+            //         // Create celebration hearts
+            //         for (let i = 0; i < 10; i++) {
+            //             setTimeout(createHeart, i * 200);
+            //         }
+            //     } else {
+            //         throw new Error('Network response was not ok');
+            //     }
+            // } catch (error) {
+            //     console.error('Error:', error);
+            //     alert('There was an error submitting your RSVP. Please try again or contact us directly.');
+            // } finally {
+            //     // Reset button
+            //     submitBtn.innerHTML = originalText;
+            //     submitBtn.disabled = false;
+            // }
         // Form validation enhancements
         const inputs = document.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
