@@ -1,1987 +1,1367 @@
-  <!DOCTYPE html>
-  <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Correct mobile viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Darshan & Nidhi’s Wedding Celebration</title>
-    <!-- Force minimal/blank social preview -->
-    <!-- Social sharing / preview control -->
-    <meta property="og:title" content="Darshan & Nidhi - A Love Beyond Words" />
-    <meta property="og:description"
-      content="Join us to celebrate our wedding on 27th November 2025 at Palkhi Banquet, Vadodara." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://wedding-invite-mauve.vercel.app/" />
-    <meta property="og:image" content="https://wedding-invite-mauve.vercel.app/couple.jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+<head>
+  <meta charset="UTF-8" />
+  <!-- Correct mobile viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Darshan & Nidhi's Wedding Celebration</title>
+  <!-- Force minimal/blank social preview -->
+  <!-- Social sharing / preview control -->
+  <meta property="og:title" content="Darshan & Nidhi - A Love Beyond Words" />
+  <meta property="og:description"
+    content="Join us to celebrate our wedding on 27th November 2025 at Palkhi Banquet, Vadodara." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wedding-invite-mauve.vercel.app/" />
+  <meta property="og:image" content="https://wedding-invite-mauve.vercel.app/couple.jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-    <!-- Twitter card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Darshan & Nidhi - A Love Beyond Words" />
-    <meta name="twitter:description"
-      content="Join us to celebrate our wedding on 27th November 2025 at Palkhi Banquet, Vadodara." />
-    <meta name="twitter:image" content="https://wedding-invite-mauve.vercel.app/couple.jpeg" />
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Darshan & Nidhi - A Love Beyond Words" />
+  <meta name="twitter:description"
+    content="Join us to celebrate our wedding on 27th November 2025 at Palkhi Banquet, Vadodara." />
+  <meta name="twitter:image" content="https://wedding-invite-mauve.vercel.app/couple.jpeg" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <style>
-      :root {
-        --primary: #8b4a6b;
-        --primary-light: #a86b7a;
-        --primary-dark: #6b2c45;
-        --secondary: #d4af37;
-        --secondary-light: #e6c76b;
-        --secondary-dark: #b8941f;
-        --accent: #5d4e75;
-        --accent-light: #7a6b9d;
-        --neutral-dark: #1f1b1d;
-        --neutral-medium: #4a4a4a;
-        --neutral-light: #f5f2f0;
-        --text-primary: #ffffff;
-        --text-secondary: #e8d5c4;
-        --text-muted: #c4b5a8;
-        --heart-pink: #ff7ea8;
-        --leaf: #9ad4b0;
-        --leaf-stroke: #6db389;
-        --flower-light: #ffc6d9;
-        --flower: #ff9bc0;
-        --title-g1: #ffffff;
-        --title-g2: #ffd1e6;
-        --title-g3: #ffe27a;
-        --hero-bg: url("couple.jpeg");
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #8b4a6b;
+      --primary-light: #a86b7a;
+      --primary-dark: #6b2c45;
+      --secondary: #d4af37;
+      --secondary-light: #e6c76b;
+      --secondary-dark: #b8941f;
+      --accent: #5d4e75;
+      --accent-light: #7a6b9d;
+      --neutral-dark: #1f1b1d;
+      --neutral-medium: #4a4a4a;
+      --neutral-light: #f5f2f0;
+      --text-primary: #ffffff;
+      --text-secondary: #e8d5c4;
+      --text-muted: #c4b5a8;
+      --heart-pink: #ff7ea8;
+      --leaf: #9ad4b0;
+      --leaf-stroke: #6db389;
+      --flower-light: #ffc6d9;
+      --flower: #ff9bc0;
+      --title-g1: #ffffff;
+      --title-g2: #ffd1e6;
+      --title-g3: #ffe27a;
+      --hero-bg: url("couple.jpeg");
+    }
+
+    /* === Unified Overlay Controls === */
+    :root {
+      --ctrl-h: 44px;
+      --ctrl-pad-x: 14px;
+      --ctrl-gap: 8px;
+      --ctrl-bg: rgba(0, 0, 0, .45);
+      --ctrl-bg-hover: rgba(255, 255, 255, .12);
+      --ctrl-border: rgba(255, 255, 255, .28);
+      --ctrl-ring: rgba(212, 175, 55, .38);
+      /* gold-ish focus ring */
+      --ctrl-shadow: 0 8px 22px rgba(0, 0, 0, .28);
+      --ctrl-fz: 14px;
+      --ctrl-ico: 16px;
+    }
+
+    /* Container stays vertical stack on the top-right */
+    .invite-controls {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    /* Base pill */
+    .invite-ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ctrl-gap);
+      height: var(--ctrl-h);
+      padding: 0 var(--ctrl-pad-x);
+      border-radius: 999px;
+      border: 1px solid var(--ctrl-border);
+      background: var(--ctrl-bg);
+      color: #fff;
+      font-weight: 700;
+      font-size: var(--ctrl-fz);
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      box-shadow: var(--ctrl-shadow);
+      transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease, border-color .15s ease;
+      text-decoration: none;
+      /* for <a> RSVP */
+    }
+
+    .invite-ctrl-btn:hover {
+      background: var(--ctrl-bg-hover);
+      transform: translateY(-1px);
+    }
+
+    .invite-ctrl-btn:active {
+      transform: translateY(0);
+    }
+
+    .invite-ctrl-btn:focus-visible {
+      outline: none;
+      box-shadow:
+        0 0 0 2px rgba(0, 0, 0, .4),
+        0 0 0 4px var(--ctrl-ring);
+    }
+
+    /* Icon sizing & alignment */
+    .invite-ctrl-btn i {
+      width: 1.1em;
+      height: 1.1em;
+      font-size: var(--ctrl-ico);
+      line-height: 1;
+      display: inline-grid;
+      place-items: center;
+    }
+
+    /* Toggle active look (Mute when sound ON) */
+    .invite-ctrl-btn.toggle.active {
+      background: rgba(255, 255, 255, .18);
+      border-color: rgba(255, 255, 255, .38);
+    }
+
+    /* Make labels auto-hide on very small screens */
+    @media (max-width:480px) {
+      .invite-ctrl-btn {
+        height: 40px;
       }
 
-      /* === Unified Overlay Controls === */
-  :root{
-    --ctrl-h: 44px;
-    --ctrl-pad-x: 14px;
-    --ctrl-gap: 8px;
-    --ctrl-bg: rgba(0,0,0,.45);
-    --ctrl-bg-hover: rgba(255,255,255,.12);
-    --ctrl-border: rgba(255,255,255,.28);
-    --ctrl-ring: rgba(212,175,55,.38); /* gold-ish focus ring */
-    --ctrl-shadow: 0 8px 22px rgba(0,0,0,.28);
-    --ctrl-fz: 14px;
-    --ctrl-ico: 16px;
-  }
+      .invite-ctrl-btn span {
+        display: none;
+      }
+    }
 
-  /* Container stays vertical stack on the top-right */
-  .invite-controls{
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 10px;
-    z-index: 1;
-  }
+    /* Consistent styling for overlay controls (all the pills look the same) */
+    .invite-overlay .invite-ctrl-btn {
+      background: var(--ctrl-bg);
+      border-color: var(--ctrl-border);
+      color: #fff;
+      box-shadow: var(--ctrl-shadow);
+    }
 
-  /* Base pill */
-  .invite-ctrl-btn{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ctrl-gap);
-    height: var(--ctrl-h);
-    padding: 0 var(--ctrl-pad-x);
-    border-radius: 999px;
-    border: 1px solid var(--ctrl-border);
-    background: var(--ctrl-bg);
-    color: #fff;
-    font-weight: 700;
-    font-size: var(--ctrl-fz);
-    cursor: pointer;
-    backdrop-filter: blur(6px);
-    box-shadow: var(--ctrl-shadow);
-    transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease, border-color .15s ease;
-    text-decoration: none; /* for <a> RSVP */
-  }
+    .invite-overlay .invite-ctrl-btn:hover {
+      background: var(--ctrl-bg-hover);
+    }
 
-  .invite-ctrl-btn:hover{
-    background: var(--ctrl-bg-hover);
-    transform: translateY(-1px);
-  }
-  .invite-ctrl-btn:active{
-    transform: translateY(0);
-  }
-  .invite-ctrl-btn:focus-visible{
-    outline: none;
-    box-shadow:
-      0 0 0 2px rgba(0,0,0,.4),
-      0 0 0 4px var(--ctrl-ring);
-  }
+    /* RSVP button at bottom center of video */
+    .invite-bottom-rsvp {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: var(--neutral-dark);
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform .3s ease, box-shadow .3s ease;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, .4);
+      backdrop-filter: blur(10px);
+      z-index: 2;
+    }
 
-  /* Icon sizing & alignment */
-  .invite-ctrl-btn i{
-    width: 1.1em;
-    height: 1.1em;
-    font-size: var(--ctrl-ico);
-    line-height: 1;
-    display: inline-grid;
-    place-items: center;
-  }
+    .invite-bottom-rsvp:hover {
+      transform: translateX(-50%) translateY(-3px) scale(1.05);
+      box-shadow: 0 18px 38px rgba(212, 175, 55, .5);
+    }
 
-  /* Primary style (RSVP) */
-  .invite-ctrl-btn.primary{
-    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-    border-color: transparent;
-    color: var(--neutral-dark);
-    box-shadow: 0 8px 22px rgba(212,175,55,.28);
-  }
-  .invite-ctrl-btn.primary:hover{
-    filter: brightness(1.02);
-  }
+    .invite-bottom-rsvp i {
+      font-size: 18px;
+    }
 
-  /* Toggle active look (Mute when sound ON) */
-  .invite-ctrl-btn.toggle.active{
-    background: rgba(255,255,255,.18);
-    border-color: rgba(255,255,255,.38);
-  }
+    @media (max-width: 480px) {
+      .invite-bottom-rsvp {
+        bottom: 30px;
+        padding: 14px 24px;
+        font-size: 1rem;
+      }
+    }
 
-  /* Make labels auto-hide on very small screens */
-  @media (max-width:480px){
-    .invite-ctrl-btn{ height: 40px; }
-    .invite-ctrl-btn span{ display:none; }
-  }
+    /* Red heart only on the "View Wedding Details" CTA */
+    .explore-btn .fa-heart {
+      color: #1f1b1d
+    }
 
-  /* Consistent styling for overlay controls (all the pills look the same) */
-  .invite-overlay .invite-ctrl-btn {
-    background: var(--ctrl-bg);
-    border-color: var(--ctrl-border);
-    color: #fff;
-    box-shadow: var(--ctrl-shadow);
-  }
-  .invite-overlay .invite-ctrl-btn:hover{
-    background: var(--ctrl-bg-hover);
-  }
+    /* solid red */
+    .explore-btn:hover .fa-heart {
+      filter: brightness(1.05);
+    }
 
-  /* Temporarily hide the bottom-right quick unmute button */
-  .invite-unmute { display: none !important; }
+    /* Chrome / Edge / Safari */
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+      -webkit-text-fill-color: var(--text-primary);
+      caret-color: var(--text-primary);
+      /* Paint the same dark glass as your theme */
+      box-shadow: 0 0 0 1000px rgba(255, 255, 255, .08) inset !important;
+      border: 1px solid rgba(212, 175, 55, .2);
+      transition: background-color 99999s ease-out 0s;
+      /* suppress flash */
+    }
 
-  /* Ensure the overlay's "RSVP" pill doesn't use the gold gradient */
-  .invite-overlay .invite-ctrl-btn.primary{
-    background: var(--ctrl-bg);
-    border-color: var(--ctrl-border);
-    color: #fff;
-    box-shadow: var(--ctrl-shadow);
-  }
+    /* Firefox */
+    input:-moz-autofill,
+    textarea:-moz-autofill,
+    select:-moz-autofill {
+      -moz-text-fill-color: var(--text-primary);
+      caret-color: var(--text-primary);
+      box-shadow: 0 0 0 1000px rgba(255, 255, 255, .08) inset !important;
+      border: 1px solid rgba(212, 175, 55, .2);
+    }
 
-  /* === Quick Unmute FAB (bottom-right) — now visually consistent === */
-  .invite-unmute{
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    /* inherit the same pill visuals */
-    height: var(--ctrl-h);
-    padding: 0 var(--ctrl-pad-x);
-    border-radius: 999px;
-    border: 1px solid var(--ctrl-border);
-    background: var(--ctrl-bg);
-    color: #fff;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ctrl-gap);
-    box-shadow: var(--ctrl-shadow);
-    backdrop-filter: blur(6px);
-    transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease, border-color .15s ease;
-    font-weight: 700;
-  }
-  .invite-unmute i{
-    width: 1.1em;
-    height: 1.1em;
-    font-size: var(--ctrl-ico);
-    line-height: 1;
-    display: inline-grid;
-    place-items: center;
-  }
-  .invite-unmute:hover{ background: var(--ctrl-bg-hover); transform: translateY(-1px); }
-  .invite-unmute:active{ transform: translateY(0); }
-  .invite-unmute:focus-visible{
-    outline: none;
-    box-shadow:
-      0 0 0 2px rgba(0,0,0,.4),
-      0 0 0 4px var(--ctrl-ring);
-  }
+    /* Keep focus state consistent even when autofilled */
+    .form-input:focus,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill:focus,
+    input:-moz-autofill:focus,
+    textarea:-moz-autofill:focus,
+    select:-moz-autofill:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, .1), 0 0 0 1000px rgba(255, 255, 255, .12) inset !important;
+      background: rgba(255, 255, 255, .12);
+    }
 
-  /* Optional: hide the bottom-right quick button on very small screens */
-  @media (max-width:480px){
-    .invite-unmute{ height: 40px; }
-  }
 
-      /* Global/mobile safety */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box
+    html,
+    body {
+      height: 100%;
+      overflow-x: hidden
+    }
+
+    img,
+    video,
+    svg {
+      max-width: 100%;
+      height: auto;
+      display: block
+    }
+
+    html {
+      overscroll-behavior-y: none
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text-primary);
+      min-height: calc(var(--vh, 1vh)*100);
+      background: var(--neutral-dark);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .clip-x {
+      overflow-x: hidden
+    }
+
+    .bg-3d {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(900px 650px at 80% 15%, rgba(212, 175, 55, .10), transparent 60%),
+        radial-gradient(850px 650px at 25% 85%, rgba(93, 78, 117, .10), transparent 60%),
+        linear-gradient(135deg, var(--neutral-dark), var(--accent), var(--primary-dark) 55%, var(--accent-light), var(--neutral-dark));
+      background-attachment: fixed;
+      will-change: transform
+    }
+
+    .page-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0, 0, 0, .12), transparent 30%);
+      z-index: -1;
+      pointer-events: none
+    }
+
+    .floating-elements {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none
+    }
+
+    .floating-heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      opacity: .7;
+      transform: translate(var(--x, 0vw), 100vh) scale(.8);
+      will-change: transform, opacity;
+      animation: floatUp linear infinite both;
+      filter: drop-shadow(0 0 6px rgba(255, 126, 168, .45));
+      pointer-events: none
+    }
+
+    .floating-heart svg {
+      width: 100%;
+      height: 100%;
+      display: block
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translate(var(--x), 100vh) scale(.8);
+        opacity: 0
       }
 
-      /* Hide the inputs once submitted, but keep the success panel visible */
-      /* When submitted: hide inputs gracefully and reveal success text */
-      .rsvp-form.submitted .form-grid,
-      .rsvp-form.submitted .submit-btn {
-        opacity: 0;
-        visibility: hidden;
-        max-height: 0;
-        margin: 0;
-        overflow: hidden;
-        transition: opacity .25s ease, visibility .25s ease, max-height .25s ease, margin .25s ease;
+      5% {
+        opacity: .95
       }
 
-      .rsvp-form.submitted .success-message {
-        opacity: 1;
-        visibility: visible;
+      95% {
+        opacity: .8
       }
 
-      /* Red heart only on the "View Wedding Details" CTA */
-      .explore-btn .fa-heart {
-        color: #1f1b1d
+      100% {
+        transform: translate(calc(var(--x) + var(--drift, 0px)), -10vh) scale(1);
+        opacity: 0
+      }
+    }
+
+    .particle-dot {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--secondary-light);
+      border-radius: 50%;
+      animation: particleFloat 8s infinite linear;
+      box-shadow: 0 0 8px var(--secondary-light)
+    }
+
+    @keyframes particleFloat {
+
+      0%,
+      100% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0
       }
 
-      /* solid red */
-      .explore-btn:hover .fa-heart {
-        filter: brightness(1.05);
-      }
-
-      /* Chrome / Edge / Safari */
-      input:-webkit-autofill,
-      textarea:-webkit-autofill,
-      select:-webkit-autofill {
-        -webkit-text-fill-color: var(--text-primary);
-        caret-color: var(--text-primary);
-        /* Paint the same dark glass as your theme */
-        box-shadow: 0 0 0 1000px rgba(255, 255, 255, .08) inset !important;
-        border: 1px solid rgba(212, 175, 55, .2);
-        transition: background-color 99999s ease-out 0s;
-        /* suppress flash */
-      }
-
-      /* Firefox */
-      input:-moz-autofill,
-      textarea:-moz-autofill,
-      select:-moz-autofill {
-        -moz-text-fill-color: var(--text-primary);
-        caret-color: var(--text-primary);
-        box-shadow: 0 0 0 1000px rgba(255, 255, 255, .08) inset !important;
-        border: 1px solid rgba(212, 175, 55, .2);
-      }
-
-      /* Keep focus state consistent even when autofilled */
-      .form-input:focus,
-      input:-webkit-autofill:focus,
-      textarea:-webkit-autofill:focus,
-      select:-webkit-autofill:focus,
-      input:-moz-autofill:focus,
-      textarea:-moz-autofill:focus,
-      select:-moz-autofill:focus {
-        border-color: var(--secondary);
-        box-shadow: 0 0 0 3px rgba(212, 175, 55, .1), 0 0 0 1000px rgba(255, 255, 255, .12) inset !important;
-        background: rgba(255, 255, 255, .12);
-      }
-
-
-      html,
-      body {
-        height: 100%;
-        overflow-x: hidden
-      }
-
-      img,
-      video,
-      svg {
-        max-width: 100%;
-        height: auto;
-        display: block
-      }
-
-      html {
-        overscroll-behavior-y: none
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        color: var(--text-primary);
-        min-height: calc(var(--vh, 1vh)*100);
-        background: var(--neutral-dark);
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-      }
-
-      .clip-x {
-        overflow-x: hidden
-      }
-
-      .bg-3d {
-        position: fixed;
-        inset: 0;
-        z-index: -2;
-        background:
-          radial-gradient(900px 650px at 80% 15%, rgba(212, 175, 55, .10), transparent 60%),
-          radial-gradient(850px 650px at 25% 85%, rgba(93, 78, 117, .10), transparent 60%),
-          linear-gradient(135deg, var(--neutral-dark), var(--accent), var(--primary-dark) 55%, var(--accent-light), var(--neutral-dark));
-        background-attachment: fixed;
-        will-change: transform
-      }
-
-      .page-overlay {
-        position: fixed;
-        inset: 0;
-        background: linear-gradient(0deg, rgba(0, 0, 0, .12), transparent 30%);
-        z-index: -1;
-        pointer-events: none
-      }
-
-      .floating-elements {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        overflow: hidden;
-        pointer-events: none
-      }
-
-      .floating-heart {
-        position: absolute;
-        width: 18px;
-        height: 18px;
+      10% {
         opacity: .7;
-        transform: translate(var(--x, 0vw), 100vh) scale(.8);
-        will-change: transform, opacity;
-        animation: floatUp linear infinite both;
-        filter: drop-shadow(0 0 6px rgba(255, 126, 168, .45));
-        pointer-events: none
+        transform: translateY(90vh) translateX(18px) scale(1)
       }
 
-      .floating-heart svg {
-        width: 100%;
-        height: 100%;
-        display: block
+      90% {
+        opacity: .5;
+        transform: translateY(10vh) translateX(-18px) scale(.5)
       }
+    }
 
-      @keyframes floatUp {
-        0% {
-          transform: translate(var(--x), 100vh) scale(.8);
-          opacity: 0
-        }
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: calc(var(--vh, 1vh)*100);
+      display: grid;
+      place-items: center;
+      padding: 12rem 1.25rem 5rem;
+      isolation: isolate
+    }
 
-        5% {
-          opacity: .95
-        }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(0, 0, 0, .35), rgba(0, 0, 0, .55) 60%), var(--hero-bg) center/cover no-repeat;
+      opacity: .55;
+      transform: scale(1.02);
+      filter: saturate(1.05) contrast(1.05);
+      will-change: transform
+    }
 
-        95% {
-          opacity: .8
-        }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 60%, rgba(139, 74, 107, .14), transparent 55%);
+      z-index: 1
+    }
 
-        100% {
-          transform: translate(calc(var(--x) + var(--drift, 0px)), -10vh) scale(1);
-          opacity: 0
-        }
-      }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 1000px;
+      margin: 5rem auto 0;
+      /* Changed from 8rem to 5rem */
+      transform: translateY(6vh);
+      /* Changed from 10vh to 6vh */
+    }
 
-      .particle-dot {
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: var(--secondary-light);
-        border-radius: 50%;
-        animation: particleFloat 8s infinite linear;
-        box-shadow: 0 0 8px var(--secondary-light)
-      }
+    .pre-title {
+      font-family: "Dancing Script", cursive;
+      font-size: 2rem;
+      color: var(--text-secondary);
+      opacity: 0;
+      animation: fadeInUp .9s ease-out .4s forwards;
+      margin-bottom: 1rem
+    }
 
-      @keyframes particleFloat {
+    .main-title {
+      font-family: serif;
+      font-size: clamp(3.2rem, 8vw, 8rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--title-g1) 0%, var(--title-g2) 40%, var(--title-g3) 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 30px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .15);
+      letter-spacing: .5px;
+      opacity: 0;
+      animation: titleReveal 1.6s ease-out .8s forwards;
+      margin-bottom: 1.2rem;
+      font-variant-ligatures: common-ligatures;
+      font-feature-settings: "liga", "clig", "kern"
+    }
 
-        0%,
-        100% {
-          transform: translateY(100vh) translateX(0) scale(0);
-          opacity: 0
-        }
-
-        10% {
-          opacity: .7;
-          transform: translateY(90vh) translateX(18px) scale(1)
-        }
-
-        90% {
-          opacity: .5;
-          transform: translateY(10vh) translateX(-18px) scale(.5)
-        }
-      }
-
-      /* Hero */
-      .hero {
-        position: relative;
-        min-height: calc(var(--vh, 1vh)*100);
-        display: grid;
-        place-items: center;
-        padding: 12rem 1.25rem 5rem;
-        isolation: isolate
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background:
-          radial-gradient(ellipse at center, rgba(0, 0, 0, .35), rgba(0, 0, 0, .55) 60%), var(--hero-bg) center/cover no-repeat;
-        opacity: .55;
-        transform: scale(1.02);
-        filter: saturate(1.05) contrast(1.05);
-        will-change: transform
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 50% 60%, rgba(139, 74, 107, .14), transparent 55%);
-        z-index: 1
-      }
-
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        max-width: 1000px;
-        margin: 5rem auto 0; /* Changed from 8rem to 5rem */
-        transform: translateY(6vh); /* Changed from 10vh to 6vh */
-      }
-
-      .pre-title {
-        font-family: "Dancing Script", cursive;
-        font-size: 2rem;
-        color: var(--text-secondary);
+    @keyframes titleReveal {
+      0% {
         opacity: 0;
-        animation: fadeInUp .9s ease-out .4s forwards;
-        margin-bottom: 1rem
+        transform: translateY(60px) rotateX(-60deg)
       }
 
-      .main-title {
-        font-family: serif;
-        font-size: clamp(3.2rem, 8vw, 8rem);
-        font-weight: 800;
-        background: linear-gradient(135deg, var(--title-g1) 0%, var(--title-g2) 40%, var(--title-g3) 80%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 2px 30px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .15);
-        letter-spacing: .5px;
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0)
+      }
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      opacity: 0;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: fadeInUp .9s ease-out 1.4s forwards;
+      margin-bottom: 2.2rem
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeInUp .9s ease-out 1.8s forwards
+    }
+
+    @keyframes fadeInUp {
+      from {
         opacity: 0;
-        animation: titleReveal 1.6s ease-out .8s forwards;
-        margin-bottom: 1.2rem;
-        font-variant-ligatures: common-ligatures;
-        font-feature-settings: "liga", "clig", "kern"
+        transform: translateY(30px)
       }
 
-      @keyframes titleReveal {
-        0% {
-          opacity: 0;
-          transform: translateY(60px) rotateX(-60deg)
-        }
-
-        100% {
-          opacity: 1;
-          transform: translateY(0) rotateX(0)
-        }
-      }
-
-      .subtitle {
-        font-size: 1.3rem;
-        font-weight: 300;
-        color: var(--text-secondary);
-        opacity: 0;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        animation: fadeInUp .9s ease-out 1.4s forwards;
-        margin-bottom: 2.2rem
-      }
-
-      .hero-cta {
-        display: flex;
-        gap: 14px;
-        justify-content: center;
-        flex-wrap: wrap;
-        opacity: 0;
-        animation: fadeInUp .9s ease-out 1.8s forwards
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px)
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0)
-        }
-      }
-
-      .explore-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 28px;
-        background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-        color: var(--neutral-dark);
-        text-decoration: none;
-        border-radius: 999px;
-        font-weight: 700;
-        font-size: 1rem;
-        transition: transform .3s ease, box-shadow .3s ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(212, 175, 55, .25);
-        white-space: nowrap
-      }
-
-      .explore-btn:hover {
-        transform: translateY(-3px) scale(1.03);
-        box-shadow: 0 18px 38px rgba(212, 175, 55, .38)
-      }
-
-      .explore-btn::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .3), transparent);
-        transform: translateX(-100%);
-        transition: transform .5s ease
-      }
-
-      .explore-btn:hover::before {
-        transform: translateX(100%)
-      }
-
-      .directions-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 28px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: var(--text-primary);
-        text-decoration: none;
-        border-radius: 999px;
-        font-weight: 700;
-        font-size: 1rem;
-        transition: transform .3s ease, box-shadow .3s ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(139, 74, 107, .25);
-        margin-top: 16px;
-        white-space: nowrap
-      }
-
-      .directions-btn:hover {
-        transform: translateY(-3px) scale(1.03);
-        box-shadow: 0 18px 38px rgba(139, 74, 107, .38)
-      }
-
-      .directions-btn::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
-        transform: translateX(-100%);
-        transition: transform .5s ease
-      }
-
-      .directions-btn:hover::before {
-        transform: translateX(100%)
-      }
-
-      .scroll-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: rgba(212, 175, 55, .15);
-        z-index: 1000
-      }
-
-      .scroll-progress-bar {
-        height: 100%;
-        background: linear-gradient(90deg, var(--secondary), var(--secondary-dark));
-        width: 0;
-        transition: width .1s ease;
-        box-shadow: 0 0 8px var(--secondary)
-      }
-
-      .section {
-        padding: clamp(50px, 12vh, 120px) 0;
-        position: relative;
-        scroll-margin-top: 12px
-      }
-
-      .section::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(31, 27, 29, .55), rgba(31, 27, 29, .45));
-        z-index: 1
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        position: relative;
-        z-index: 2
-      }
-
-      .section-header {
-        text-align: center;
-        margin-bottom: clamp(24px, 8vh, 80px);
-        opacity: 0;
-        transform: translateY(40px);
-        transition: all .8s ease-out
-      }
-
-      .section-header.animate {
+      to {
         opacity: 1;
         transform: translateY(0)
       }
+    }
 
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(2.2rem, 5vw, 3.6rem);
-        font-weight: 700;
-        background: linear-gradient(135deg, var(--text-primary), var(--secondary));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1rem;
-        position: relative;
-        font-variant-ligatures: common-ligatures;
-        font-feature-settings: "liga", "clig", "kern"
+    .explore-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: var(--neutral-dark);
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, .25);
+      white-space: nowrap
+    }
+
+    .explore-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 18px 38px rgba(212, 175, 55, .38)
+    }
+
+    .explore-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .3), transparent);
+      transform: translateX(-100%);
+      transition: transform .5s ease
+    }
+
+    .explore-btn:hover::before {
+      transform: translateX(100%)
+    }
+
+    .directions-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--text-primary);
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(139, 74, 107, .25);
+      margin-top: 16px;
+      white-space: nowrap
+    }
+
+    .directions-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 18px 38px rgba(139, 74, 107, .38)
+    }
+
+    .directions-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
+      transform: translateX(-100%);
+      transition: transform .5s ease
+    }
+
+    .directions-btn:hover::before {
+      transform: translateX(100%)
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(212, 175, 55, .15);
+      z-index: 1000
+    }
+
+    .scroll-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary), var(--secondary-dark));
+      width: 0;
+      transition: width .1s ease;
+      box-shadow: 0 0 8px var(--secondary)
+    }
+
+    .section {
+      padding: clamp(50px, 12vh, 120px) 0;
+      position: relative;
+      scroll-margin-top: 12px
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(31, 27, 29, .55), rgba(31, 27, 29, .45));
+      z-index: 1
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: clamp(24px, 8vh, 80px);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .8s ease-out
+    }
+
+    .section-header.animate {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--text-primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      position: relative;
+      font-variant-ligatures: common-ligatures;
+      font-feature-settings: "liga", "clig", "kern"
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary), var(--secondary-dark));
+      border-radius: 2px
+    }
+
+    .section-subtitle {
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-top: clamp(0.8rem, 3vw, 1.8rem);
+    }
+
+    .wedding-details {
+      max-width: 800px;
+      margin: 0 auto clamp(20px, 6vh, 40px);
+      background: linear-gradient(135deg, rgba(139, 74, 107, .08) 0%, rgba(212, 175, 55, .05) 50%, rgba(93, 78, 117, .08) 100%);
+      border-radius: 24px;
+      padding: clamp(24px, 6vw, 42px);
+      border: 1px solid rgba(212, 175, 55, .2);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+      text-align: center
+    }
+
+    .wedding-details::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(212, 175, 55, .05), transparent);
+      transform: rotate(45deg);
+      animation: shimmer 4s infinite
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%) rotate(45deg)
       }
 
-      .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 4px;
-        background: linear-gradient(90deg, var(--secondary), var(--secondary-dark));
-        border-radius: 2px
+      100% {
+        transform: translateX(100%) rotate(45deg)
       }
+    }
 
-      .section-subtitle {
-        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-        color: var(--text-secondary);
-        font-weight: 300;
-        margin-top: clamp(0.8rem, 3vw, 1.8rem);
-      }
+    .wedding-date {
+      font-family: "Cinzel", serif;
+      font-size: 2.4rem;
+      color: var(--secondary);
+      margin-bottom: .5rem;
+      font-weight: 700;
+      letter-spacing: .5px
+    }
 
-      .wedding-details {
-        max-width: 800px;
-        margin: 0 auto clamp(20px, 6vh, 40px);
-        background: linear-gradient(135deg, rgba(139, 74, 107, .08) 0%, rgba(212, 175, 55, .05) 50%, rgba(93, 78, 117, .08) 100%);
-        border-radius: 24px;
-        padding: clamp(24px, 6vw, 42px);
-        border: 1px solid rgba(212, 175, 55, .2);
-        backdrop-filter: blur(18px);
-        position: relative;
-        overflow: hidden;
-        text-align: center
-      }
+    .wedding-venue {
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin-bottom: .4rem;
+      font-weight: 600
+    }
 
-      .wedding-details::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(212, 175, 55, .05), transparent);
-        transform: rotate(45deg);
-        animation: shimmer 4s infinite
-      }
+    .wedding-time {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem
+    }
 
-      @keyframes shimmer {
-        0% {
-          transform: translateX(-100%) rotate(45deg)
-        }
+    .wedding-address {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem
+    }
 
-        100% {
-          transform: translateX(100%) rotate(45deg)
-        }
-      }
+    .details-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px
+    }
 
-      .wedding-date {
-        font-family: "Cinzel", serif;
-        font-size: 2.4rem;
-        color: var(--secondary);
-        margin-bottom: .5rem;
-        font-weight: 700;
-        letter-spacing: .5px
-      }
+    /* RSVP Section Styling */
+    .rsvp-section {
+      max-width: 700px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(139, 74, 107, .08) 0%, rgba(212, 175, 55, .05) 50%, rgba(93, 78, 117, .08) 100%);
+      border-radius: 24px;
+      padding: clamp(24px, 6vw, 48px);
+      border: 1px solid rgba(212, 175, 55, .2);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
 
-      .wedding-venue {
-        font-size: 1.25rem;
-        color: var(--text-primary);
-        margin-bottom: .4rem;
-        font-weight: 600
-      }
+    .rsvp-section::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(212, 175, 55, .05), transparent);
+      transform: rotate(45deg);
+      animation: shimmer 4s infinite;
+    }
 
-      .wedding-time {
-        font-size: 1.05rem;
-        color: var(--text-secondary);
-        margin-bottom: 1rem
-      }
+    .rsvp-form {
+      position: relative;
+      z-index: 2;
+    }
 
-      .wedding-address {
-        font-size: 1.05rem;
-        color: var(--text-muted);
-        line-height: 1.6;
-        margin-bottom: 1.5rem
-      }
+    /* Hide the inputs once submitted, but keep the success panel visible */
+    .rsvp-form.submitted .form-grid,
+    .rsvp-form.submitted .submit-btn {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0;
+      margin: 0;
+      overflow: hidden;
+      transition: opacity .25s ease, visibility .25s ease, max-height .25s ease, margin .25s ease;
+    }
 
-      .details-cta {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 24px
-      }
+    .rsvp-form.submitted .success-message {
+      opacity: 1;
+      visibility: visible;
+    }
 
-      /* Desktop/Tablet photo grid */
-      .photo-gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-        margin: 32px auto;
-        max-width: 1200px
-      }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
 
-      @media (min-width:768px) {
-        .photo-gallery {
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 24px
-        }
-      }
-
-      @media (min-width:1024px) {
-        .photo-gallery {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 28px
-        }
-      }
-
-      .photo-card {
-        position: relative;
-        aspect-ratio: 4/5;
-        border-radius: 20px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: all .4s cubic-bezier(.2, .8, .2, 1);
-        background: rgba(255, 255, 255, .04);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, .15)
-      }
-
-      .photo-card:hover {
-        transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 60px rgba(0, 0, 0, .3)
-      }
-
-      .photo-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: saturate(1.05) contrast(1.02);
-        transition: all .6s ease
-      }
-
-      .photo-card:hover img {
-        transform: scale(1.1);
-        filter: saturate(1.2) contrast(1.08)
-      }
-
-      @media (min-width:1024px) {
-        .photo-card:nth-child(2n) {
-          aspect-ratio: 4/6
-        }
-
-        .photo-card:nth-child(3n) {
-          aspect-ratio: 4/4
-        }
-      }
-
-      .badge {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        background: rgba(0, 0, 0, .6);
-        color: #fff;
-        padding: 8px 14px;
-        border-radius: 999px;
-        font-size: .85rem;
-        backdrop-filter: blur(10px);
-        font-weight: 600
-      }
-
-      .photo-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, .7));
-        display: flex;
-        align-items: flex-end;
-        padding: 20px;
-        color: #fff;
-        opacity: 0;
-        transition: opacity .4s ease
-      }
-
-      .photo-card:hover .photo-overlay {
-        opacity: 1
-      }
-
-      /* RSVP Section Styling */
-      .rsvp-section {
-        max-width: 700px;
-        margin: 0 auto;
-        background: linear-gradient(135deg, rgba(139, 74, 107, .08) 0%, rgba(212, 175, 55, .05) 50%, rgba(93, 78, 117, .08) 100%);
-        border-radius: 24px;
-        padding: clamp(24px, 6vw, 48px);
-        border: 1px solid rgba(212, 175, 55, .2);
-        backdrop-filter: blur(18px);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .rsvp-section::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(212, 175, 55, .05), transparent);
-        transform: rotate(45deg);
-        animation: shimmer 4s infinite;
-      }
-
-      .rsvp-form {
-        position: relative;
-        z-index: 2;
-      }
-
+    @media (min-width: 768px) {
       .form-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 24px;
-        margin-bottom: 32px;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      padding: 16px;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(212, 175, 55, .2);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all .3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--secondary);
+      background: rgba(255, 255, 255, .12);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, .1);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(212, 175, 55, .2);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+
+    .toggle-btn.is-active {
+      background: var(--secondary);
+      color: var(--neutral-dark);
+      border-color: var(--secondary);
+    }
+
+    .toggle-btn:hover:not(.is-active) {
+      background: rgba(255, 255, 255, .08);
+      border-color: var(--secondary-light);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--text-primary);
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(139, 74, 107, .3);
+    }
+
+    .submit-btn:disabled {
+      opacity: .7;
+      cursor: not-allowed;
+    }
+
+    /* Spinner animation */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
       }
 
-      @media (min-width: 768px) {
-        .form-grid {
-          grid-template-columns: 1fr 1fr;
-        }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Success panel: reserve no space until shown, but fade in smoothly */
+    .success-message {
+      display: block;
+      /* keep as block so it paints inside the card */
+      opacity: 0;
+      visibility: hidden;
+      transform: none;
+      /* remove translate to avoid first-frame jump */
+      transition: opacity .35s ease, visibility .35s ease;
+      margin-top: 24px;
+    }
+
+    .success-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .success-message h3 {
+      color: var(--leaf);
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .success-message p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    @media (min-width:1024px) {
+      .photo-card:nth-child(2n) {
+        aspect-ratio: 4/6
       }
 
-      .form-group {
-        display: flex;
-        flex-direction: column;
+      .photo-card:nth-child(3n) {
+        aspect-ratio: 4/4
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important
+      }
+    }
+
+    @supports (-webkit-touch-callout:none) {
+      .bg-3d {
+        background-attachment: scroll
       }
 
-      .form-group label {
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 8px;
+      .main-title {
+        letter-spacing: .2px
       }
 
-      .form-input {
-        padding: 16px;
-        background: rgba(255, 255, 255, .08);
-        border: 1px solid rgba(212, 175, 55, .2);
-        border-radius: 12px;
-        color: var(--text-primary);
-        font-size: 1rem;
-        transition: all .3s ease;
+      .main-title,
+      .section-title {
+        font-family: "Bodoni Moda", Georgia, "Times New Roman", serif
+      }
+    }
+
+    /* --- Fullscreen Invitation Video Overlay --- */
+    .invite-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      display: none;
+      background: #000;
+      transform-origin: var(--inv-origin-x, 100%) var(--inv-origin-y, 0);
+      will-change: transform, opacity;
+    }
+
+    .invite-overlay.is-open {
+      display: block;
+    }
+
+    .invite-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    /* Floating "Watch invite video" button */
+    .invite-watch-btn {
+      position: fixed;
+      top: max(14px, env(safe-area-inset-top) + 14px);
+      right: max(18px, env(safe-area-inset-right) + 18px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      background: rgba(0, 0, 0, .45);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      z-index: 10001;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+    }
+
+    .invite-watch-btn:hover {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    @media (max-width:480px) {
+      .invite-watch-btn {
+        height: 42px;
+        padding: 0 14px;
+      }
+    }
+
+    @media (max-width:768px) {
+      .hero {
+        padding: 10rem 1.25rem 4rem;
       }
 
-      .form-input:focus {
-        outline: none;
-        border-color: var(--secondary);
-        background: rgba(255, 255, 255, .12);
-        box-shadow: 0 0 0 3px rgba(212, 175, 55, .1);
+      .hero-content {
+        margin: 3rem auto 0;
+        transform: translateY(3vh);
       }
 
-      .form-input::placeholder {
-        color: var(--text-muted);
+      .section {
+        padding: 80px 0
       }
 
-      .toggle-row {
-        display: flex;
-        gap: 12px;
-        margin-top: 8px;
+      .rsvp-section,
+      .wedding-details {
+        padding: 36px 20px
       }
 
       .toggle-btn {
-        flex: 1;
-        padding: 12px 16px;
-        background: rgba(255, 255, 255, .05);
-        border: 1px solid rgba(212, 175, 55, .2);
-        border-radius: 8px;
-        color: var(--text-secondary);
-        font-size: .95rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all .3s ease;
+        min-width: 110px;
+        padding: 9px 12px;
+        font-size: .9rem
       }
-
-      .toggle-btn.is-active {
-        background: var(--secondary);
-        color: var(--neutral-dark);
-        border-color: var(--secondary);
-      }
-
-      .toggle-btn:hover:not(.is-active) {
-        background: rgba(255, 255, 255, .08);
-        border-color: var(--secondary-light);
-      }
-
-      .submit-btn {
-        width: 100%;
-        padding: 18px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: var(--text-primary);
-        border: none;
-        border-radius: 12px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all .3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .submit-btn:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(139, 74, 107, .3);
-      }
-
-      .submit-btn:disabled {
-        opacity: .7;
-        cursor: not-allowed;
-      }
-
-      /* Success panel: reserve no space until shown, but fade in smoothly */
-      .success-message {
-        display: block;
-        /* keep as block so it paints inside the card */
-        opacity: 0;
-        visibility: hidden;
-        transform: none;
-        /* remove translate to avoid first-frame jump */
-        transition: opacity .35s ease, visibility .35s ease;
-        margin-top: 24px;
-      }
-
-      .success-message.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .success-message h3 {
-        color: var(--leaf);
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-      }
-
-      .success-message p {
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-      }
-
-      /* Lightbox */
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, .95);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        opacity: 0;
-        visibility: hidden;
-        transition: all .3s ease;
-        backdrop-filter: blur(10px)
-      }
-
-      .lightbox.open {
-        opacity: 1;
-        visibility: visible
-      }
-
-      .lightbox img {
-        max-width: 90vw;
-        max-height: 80vh;
-        object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, .5)
-      }
-
-      .lightbox .close {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        background: rgba(0, 0, 0, .7);
-        color: #fff;
-        border: none;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 20px;
-        transition: all .3s ease;
-        backdrop-filter: blur(10px)
-      }
-
-      .lightbox .close:hover {
-        background: rgba(255, 255, 255, .2);
-        transform: scale(1.1)
-      }
-
-      .lightbox .nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        border: none;
-        background: rgba(255, 255, 255, .12);
-        color: #fff;
-        cursor: pointer;
-        font-size: 22px;
-        display: grid;
-        place-items: center;
-        transition: .25s
-      }
-
-      .lightbox .nav:hover {
-        background: rgba(255, 255, 255, .22);
-        transform: translateY(-50%) scale(1.06)
-      }
-
-      .lightbox .prev {
-        left: 24px
-      }
-
-      .lightbox .next {
-        right: 24px
-      }
-
-      .lightbox .caption {
-        position: absolute;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        color: #fff;
-        font-size: 1rem;
-        background: rgba(0, 0, 0, .35);
-        padding: 10px 14px;
-        border-radius: 10px;
-        max-width: 90vw;
-        text-align: center
-      }
-
-      /* Mobile-only carousel */
-      .mobile-carousel {
-        display: none
-      }
-
-      @media (max-width:768px) {
-        .hero {
-          padding: 10rem 1.25rem 4rem;
-        }
-
-        .hero-content {
-          margin: 3rem auto 0; /* Changed from 6rem to 2rem */
-          transform: translateY(3vh); /* Changed from 8vh to 2vh */
-        }
-
-        #gallery {
-          display: none
-        }
-
-        .section {
-          padding: 80px 0
-        }
-
-        .rsvp-section,
-        .wedding-details {
-          padding: 36px 20px
-        }
-
-        .toggle-btn {
-          min-width: 110px;
-          padding: 9px 12px;
-          font-size: .9rem
-        }
-
-        .mobile-carousel {
-          display: block;
-          margin: 24px auto 8px;
-          max-width: 520px
-        }
-
-        .carousel-viewport {
-          position: relative;
-          overflow: hidden;
-          border-radius: 20px;
-          aspect-ratio: 4/5;
-          background: rgba(255, 255, 255, .04);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
-          touch-action: pan-y
-        }
-
-        .carousel-track {
-          display: flex;
-          width: 100%;
-          height: 100%;
-          will-change: transform;
-          transition: transform .45s ease
-        }
-
-        .carousel-slide {
-          min-width: 100%;
-          height: 100%;
-          flex: 0 0 100%;
-          position: relative
-        }
-
-        .carousel-slide img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover
-        }
-
-        .slide-caption {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          padding: 10px 12px;
-          background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .6));
-          color: #fff;
-          font-weight: 700;
-          font-size: .95rem;
-          text-align: center
-        }
-
-        .carousel-prev,
-        .carousel-next {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          border: none;
-          background: rgba(0, 0, 0, .35);
-          color: #fff;
-          display: grid;
-          place-items: center;
-          font-size: 16px
-        }
-
-        .carousel-prev {
-          left: 8px
-        }
-
-        .carousel-next {
-          right: 8px
-        }
-
-        .carousel-dots {
-          display: flex;
-          gap: 6px;
-          justify-content: center;
-          margin: 10px 0 0
-        }
-
-        .carousel-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          border: none;
-          background: rgba(255, 255, 255, .35)
-        }
-
-        .carousel-dot.is-active {
-          background: var(--secondary)
-        }
-      }
-
-      @media (prefers-reduced-motion:reduce) {
-        * {
-          animation-duration: .01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: .01ms !important
-        }
-      }
-
-      @supports (-webkit-touch-callout:none) {
-        .bg-3d {
-          background-attachment: scroll
-        }
-
-        .main-title {
-          letter-spacing: .2px
-        }
-
-        .main-title,
-        .section-title {
-          font-family: "Bodoni Moda", Georgia, "Times New Roman", serif
-        }
-      }
-
-      /* --- Fullscreen Invitation Video Overlay (no cropping box) --- */
-      .invite-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 20000;
-        display: none;
-        /* JS toggles */
-        background: #000;
-        /* true black to frame vertical video */
-      }
-
-      .invite-overlay.is-open {
-        display: block;
-      }
-
-      .invite-video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        /* show entire vertical video */
-        background: #000;
-        /* fills any side bars */
-      }
-
-      /* Top-right control cluster */
-      .invite-controls {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        display: flex;
-        gap: 10px;
-        z-index: 1;
-      }
-
-
-      .invite-ctrl-btn:hover {
-        background: rgba(255, 255, 255, .12);
-      }
-
-      .invite-ctrl-btn i {
-        font-size: 16px;
-      }
-
-      /* Make the RSVP button pop with your gold accent */
-      .invite-ctrl-btn.primary {
-        background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-        color: var(--neutral-dark);
-        border-color: transparent;
-        box-shadow: 0 8px 22px rgba(212, 175, 55, .28);
-      }
-
-      @media (max-width: 480px) {
-        .invite-ctrl-btn {
-          height: 40px;
-          padding: 0 12px;
-        }
-
-        .invite-ctrl-btn span {
-          display: none;
-        }
-
-        /* show icons only on very small screens */
-      }
-
-      /* Top-right control cluster: vertical stack */
-      .invite-controls {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        display: flex;
-        flex-direction: column;
-        /* ⟵ vertical */
-        align-items: flex-end;
-        gap: 10px;
-        z-index: 1;
-      }
-
-      .invite-ctrl-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        height: 42px;
-        padding: 0 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, .28);
-        background: rgba(0, 0, 0, .45);
-        color: #fff;
-        font-weight: 700;
-        cursor: pointer;
-        backdrop-filter: blur(6px);
-      }
-
-      .invite-ctrl-btn:hover {
-        background: rgba(255, 255, 255, .12);
-      }
-
-      .invite-ctrl-btn i {
-        font-size: 16px;
-      }
-
-
-      @media (max-width: 480px) {
-        .invite-ctrl-btn {
-          height: 40px;
-          padding: 0 12px;
-        }
-
-        .invite-ctrl-btn span {
-          display: none;
-        }
-
-        /* icons only on very small screens */
-      }
-      /* Floating "Watch invite video" button */
-      .invite-watch-btn{
-        position: fixed;
-        /* respect iOS safe areas and give extra right padding/spacing */
-        top: max(14px, env(safe-area-inset-top) + 14px);
-        right: max(18px, env(safe-area-inset-right) + 18px);
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        height: 44px;
-        padding: 0 18px;                 /* ⟵ a bit more breathing room */
-        border-radius: 999px;
-        border: 1px solid rgba(255,255,255,.28);
-        background: rgba(0,0,0,.45);
-        color: #fff;
-        font-weight: 700;
-        cursor: pointer;
-        backdrop-filter: blur(6px);
-        z-index: 10001;                  /* above page, below overlay when open */
-        box-shadow: 0 6px 18px rgba(0,0,0,.25);
-      }
-      .invite-watch-btn:hover{ background: rgba(255,255,255,.12); }
-
-     @media (max-width:480px){
-      .invite-watch-btn{
-        height: 42px;
-        padding: 0 14px;
-      }
-      /* Remove the span{ display:none; } rule completely */
     }
+  </style>
+</head>
 
-      /* Use the button as the transform origin for overlay animations */
-      .invite-overlay{
-        transform-origin: var(--inv-origin-x, 100%) var(--inv-origin-y, 0);
-        will-change: transform, opacity;
-      }
-
-    /* Overlay animation origin (set via CSS vars from JS) */
-    .invite-overlay{
-      transform-origin: var(--inv-origin-x, 100%) var(--inv-origin-y, 0);
-    }
-
-    </style>
-  </head>
-
-  <body class="clip-x" style="cursor:auto;">
-    <!-- Opening invitation video -->
-    <!-- Fullscreen invitation video -->
+<body class="clip-x" style="cursor:auto;">
+  <!-- Opening invitation video -->
   <button id="watchInviteBtn" class="invite-watch-btn" aria-label="Watch invite video">
     <i class="fas fa-play" aria-hidden="true"></i><span>Watch invite video</span>
   </button>
 
-    <div class="invite-overlay" id="inviteOverlay" role="dialog" aria-modal="true" aria-label="Invitation video">
-  <div class="invite-controls" aria-label="Video actions">
-    <!-- Close first -->
-    <button class="invite-ctrl-btn" id="inviteCloseBtn" aria-label="Close invitation video">
-      <i class="fas fa-times" aria-hidden="true"></i><span>Close</span>
-    </button>
-
-    <!-- RSVP second -->
-    <a href="#rsvp" class="invite-ctrl-btn primary" id="inviteRSVPBtn" role="button">
-      <i class="fas fa-envelope-open-text" aria-hidden="true"></i><span>RSVP</span>
-    </a>
-
-    <!-- Unmute third (toggle) -->
-    <button class="invite-ctrl-btn toggle" id="inviteSoundBtn" aria-label="Unmute video">
-      <i class="fas fa-volume-mute" aria-hidden="true"></i><span>Unmute</span>
-    </button>
-  </div>
-
-
-      <!-- Keep your video just below this block -->
-      <video id="inviteVideo" class="invite-video" src="invite.mp4" playsinline muted autoplay controls preload="metadata"
-        poster="couple.jpeg">
-      </video>
-
-
-      <button class="invite-unmute" id="inviteUnmuteBtn" aria-label="Unmute video">
-        <i class="fas fa-volume-mute"></i>
+  <div class="invite-overlay" id="inviteOverlay" role="dialog" aria-modal="true" aria-label="Invitation video">
+    <div class="invite-controls" aria-label="Video actions">
+      <!-- Close first -->
+      <button class="invite-ctrl-btn" id="inviteCloseBtn" aria-label="Close invitation video">
+        <i class="fas fa-times" aria-hidden="true"></i><span>Close</span>
       </button>
 
+      <!-- Unmute second (toggle) -->
+      <button class="invite-ctrl-btn toggle" id="inviteSoundBtn" aria-label="Unmute video">
+        <i class="fas fa-volume-mute" aria-hidden="true"></i><span>Unmute</span>
+      </button>
     </div>
 
+    <video id="inviteVideo" class="invite-video" src="invite.mp4" playsinline muted autoplay controls preload="metadata"
+      poster="couple.jpeg">
+    </video>
 
-    <div class="scroll-progress">
-      <div class="scroll-progress-bar"></div>
+    <!-- RSVP button at bottom center of video -->
+    <a href="#rsvp" class="invite-bottom-rsvp" id="inviteBottomRSVP" role="button">
+      <i class="fas fa-envelope-open-text" aria-hidden="true"></i><span>RSVP</span>
+    </a>
+  </div>
+
+  <div class="scroll-progress">
+    <div class="scroll-progress-bar"></div>
+  </div>
+  <div class="bg-3d"></div>
+  <div class="page-overlay"></div>
+  <div class="floating-elements" aria-hidden="true"></div>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-content">
+      <div class="pre-title">Together Forever</div>
+      <h1 class="main-title">Darshan & Nidhi</h1>
+      <p class="subtitle">Two Hearts, One Beautiful Journey</p>
+      <div class="hero-cta">
+        <a href="#details" class="explore-btn cta-next" data-target="#details"><span>View Wedding Details</span><i
+            class="fas fa-heart"></i>
+        </a>
+        <!-- New RSVP CTA on the first screen -->
+        <a href="#rsvp" class="explore-btn cta-next" data-target="#rsvp" aria-label="RSVP">
+          <span>RSVP</span><i class="fas fa-envelope-open-text"></i>
+        </a>
+      </div>
     </div>
-    <div class="bg-3d"></div>
-    <div class="page-overlay"></div>
-    <div class="floating-elements" aria-hidden="true"></div>
+  </section>
 
-    <!-- Hero -->
-    <section class="hero" id="top">
-      <div class="hero-content">
-        <div class="pre-title">Together Forever</div>
-        <h1 class="main-title">Darshan & Nidhi</h1>
-        <p class="subtitle">Two Hearts, One Beautiful Journey</p>
-        <div class="hero-cta">
-          <a href="#details" class="explore-btn cta-next" data-target="#details"><span>View Wedding Details</span><i
-              class="fas fa-heart"></i>
-          </a>
-          <!-- New RSVP CTA on the first screen -->
-          <a href="#rsvp" class="explore-btn cta-next" data-target="#rsvp" aria-label="RSVP">
-            <span>RSVP</span><i class="fas fa-envelope-open-text"></i>
-          </a>
-        </div>
+  <!-- Wedding Details -->
+  <section class="section clip-x" id="details">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Wedding Ceremony</h2>
+        <p class="section-subtitle">Join us as we begin our journey as one</p>
       </div>
-    </section>
-
-    <!-- Wedding Details -->
-    <section class="section clip-x" id="details">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Wedding Ceremony</h2>
-          <p class="section-subtitle">Join us as we begin our journey as one</p>
-        </div>
-        <div class="wedding-details">
-          <div class="wedding-date">27th November 2025</div>
-          <div class="wedding-venue">Palkhi Banquet</div>
-          <div class="wedding-time">12:00 PM</div>
-          <div class="wedding-address">Vadodara, Gujarat, India</div>
-          <a href="https://maps.google.com/?q=Palkhi%20Banquet%20Vadodara%20Gujarat%20India" target="_blank"
-            rel="noopener" class="directions-btn">
-            <i class="fas fa-map-marker-alt"></i><span>Get Directions</span>
-          </a>
-        </div>
-
-        <div class="details-cta">
-          <a href="#story" class="explore-btn cta-next" data-target="#story"><span>Our Story</span><i
-              class="fas fa-arrow-down"></i></a>
-          <a href="#rsvp" class="explore-btn cta-next" data-target="#rsvp"><span>RSVP</span><i
-              class="fas fa-arrow-down"></i></a>
-        </div>
+      <div class="wedding-details">
+        <div class="wedding-date">27th November 2025</div>
+        <div class="wedding-venue">Palkhi Banquet</div>
+        <div class="wedding-time">12:00 PM</div>
+        <div class="wedding-address">Vadodara, Gujarat, India</div>
+        <a href="https://maps.google.com/?q=Palkhi%20Banquet%20Vadodara%20Gujarat%20India" target="_blank"
+          rel="noopener" class="directions-btn">
+          <i class="fas fa-map-marker-alt"></i><span>Get Directions</span>
+        </a>
       </div>
-    </section>
 
-    <!-- Love Story -->
-    <section class="section clip-x" id="story">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Our Love Story</h2>
-          <p class="section-subtitle">A tale written in the stars, blessed by destiny</p>
-        </div>
+      <div class="details-cta">
+        <a href="#rsvp" class="explore-btn cta-next" data-target="#rsvp"><span>RSVP</span><i
+            class="fas fa-arrow-down"></i></a>
+      </div>
+    </div>
+  </section>
 
-        <div class="love-story-content">
-          <p
-            style="font-size:1.2rem;line-height:2;color:var(--text-secondary);text-align:center;max-width:820px;margin:0 auto 24px;">
-            Darshan and Nidhi's love story is two souls woven together in perfect harmony.
-          </p>
+  <!-- RSVP -->
+  <section class="section clip-x" id="rsvp">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">RSVP</h2>
+        <p class="section-subtitle">We can't wait to celebrate with you!</p>
+      </div>
 
-          <!-- Mobile-only carousel (built from grid by JS) -->
-          <div class="mobile-carousel" id="mobileCarousel" aria-label="Photo carousel" hidden></div>
-
-          <!-- Desktop/Tablet grid -->
-          <div class="photo-gallery" id="gallery">
-            <div class="photo-card" data-tags="moments">
-              <span class="badge">First Moments</span>
-              <img src="Where-it-all-began.jpeg" alt="Where it all began" />
-              <div class="photo-overlay"><strong>Where it all began</strong></div>
+      <div class="rsvp-section">
+        <form class="rsvp-form" id="rsvpForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" class="form-input" required
+                placeholder="Enter first name" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" class="form-input" required
+                placeholder="Enter last name" />
             </div>
 
-            <div class="photo-card" data-tags="party moments">
-              <span class="badge">Sweet Moments</span>
-              <img src="Love-in-every-glance.jpeg" alt="Love in every glance" />
-              <div class="photo-overlay"><strong>Love in every glance</strong></div>
+            <div class="form-group">
+              <label>Are you attending? *</label>
+              <div class="toggle-row" id="attendToggle" role="group" aria-label="Attendance">
+                <button type="button" class="toggle-btn" data-value="Yes" aria-pressed="false">Attending</button>
+                <button type="button" class="toggle-btn" data-value="No" aria-pressed="false">Not Attending</button>
+              </div>
+              <input type="hidden" id="attending" name="attending" required />
             </div>
 
-            <div class="photo-card" data-tags="party">
-              <span class="badge">The Proposal</span>
-              <img src="proposal.jpeg" alt="The proposal" />
-              <div class="photo-overlay"><strong>A moment of pure magic</strong></div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="Phone number" />
             </div>
 
-            <div class="photo-card" data-tags="moments">
-              <span class="badge">Adventures</span>
-              <img src="Creating-beautiful-memories.jpeg" alt="Creating beautiful memories" />
-              <div class="photo-overlay"><strong>Creating beautiful memories</strong></div>
-            </div>
-
-            <div class="photo-card" data-tags="party moments">
-              <span class="badge">Forever Begins</span>
-              <img src="Our-journey-ahead.jpeg" alt="Our journey ahead" />
-              <div class="photo-overlay"><strong>Our journey ahead</strong></div>
-            </div>
-
-            <div class="photo-card" data-tags="moments">
-              <span class="badge">Together</span>
-              <img src="A-moment-of-pure-magic.jpeg" alt="Engagement rings" />
-              <div class="photo-overlay"><strong>Engagement rings</strong></div>
+            <div class="form-group" id="guestsGroup">
+              <label for="guests">Number of Guests *</label>
+              <select id="guests" name="guests" class="form-input">
+                <option value="">Select number of guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5+">5+ Guests</option>
+              </select>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- RSVP -->
-    <section class="section clip-x" id="rsvp">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">RSVP</h2>
-          <p class="section-subtitle">We can't wait to celebrate with you!</p>
-        </div>
-
-        <div class="rsvp-section">
-          <form class="rsvp-form" id="rsvpForm">
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="firstName">First Name *</label>
-                <input type="text" id="firstName" name="firstName" class="form-input" required
-                  placeholder="Enter first name" />
-              </div>
-              <div class="form-group">
-                <label for="lastName">Last Name *</label>
-                <input type="text" id="lastName" name="lastName" class="form-input" required
-                  placeholder="Enter last name" />
-              </div>
-
-              <div class="form-group">
-                <label>Are you attending? *</label>
-                <div class="toggle-row" id="attendToggle" role="group" aria-label="Attendance">
-                  <button type="button" class="toggle-btn" data-value="Yes" aria-pressed="false">Attending</button>
-                  <button type="button" class="toggle-btn" data-value="No" aria-pressed="false">Not Attending</button>
-                </div>
-                <input type="hidden" id="attending" name="attending" required />
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" class="form-input" placeholder="Phone number" />
-              </div>
-
-              <div class="form-group" id="guestsGroup">
-                <label for="guests">Number of Guests *</label>
-                <select id="guests" name="guests" class="form-input">
-                  <option value="">Select number of guests</option>
-                  <option value="1">1 Guest</option>
-                  <option value="2">2 Guests</option>
-                  <option value="3">3 Guests</option>
-                  <option value="4">4 Guests</option>
-                  <option value="5+">5+ Guests</option>
-                </select>
-              </div>
+          <div class="form-grid">
+            <div class="form-group" style="grid-column:1 / -1;">
+              <label for="message">Special Message for the Couple</label>
+              <textarea id="message" name="message" class="form-input" rows="3"
+                placeholder="Share your wishes and blessings for Darshan & Nidhi"></textarea>
             </div>
+          </div>
 
-            <div class="form-grid">
-              <div class="form-group" style="grid-column:1 / -1;">
-                <label for="message">Special Message for the Couple</label>
-                <textarea id="message" name="message" class="form-input" rows="3"
-                  placeholder="Share your wishes and blessings for Darshan & Nidhi"></textarea>
-              </div>
-            </div>
+          <button type="submit" class="submit-btn">
+            <span class="btn-text">Send RSVP with Love</span>
+          </button>
 
-            <button type="submit" class="submit-btn"><span class="btn-text">Send RSVP with Love</span></button>
+          <div class="success-message" id="successMessage" role="status" aria-live="polite"></div>
 
-            <div class="success-message" id="successMessage" role="status" aria-live="polite"></div>
-
-            <input type="hidden" id="fullName" name="fullName" />
-          </form>
-        </div>
+          <input type="hidden" id="fullName" name="fullName" />
+        </form>
       </div>
-    </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-      <button class="close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
-      <button class="nav prev" id="lightboxPrev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
-      <img id="lightboxImg" alt="Expanded gallery image" />
-      <button class="nav next" id="lightboxNext" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
-      <div class="caption" id="lightboxCaption"></div>
     </div>
-
-    <script>
-      /* ---------- Scroll progress ---------- */
-      window.addEventListener('scroll', () => {
-        const bar = document.querySelector('.scroll-progress-bar');
-        const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        bar.style.width = pct + '%';
-      });
-
-      /* ---------- Robust smooth scroll (fix) ---------- */
-      // Attach after DOM is ready, and use native smooth behavior.
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('a[href^="#"], .cta-next').forEach(a => {
-          a.addEventListener('click', (e) => {
-            const sel = a.getAttribute('data-target') || a.getAttribute('href');
-            if (!sel || sel === '#') return;
-            const target = document.querySelector(sel);
-            if (!target) return;
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-          });
-        });
-      });
-
-      /* ---------- Floating decorations ---------- */
-      function createFloatingElements() {
-        const container = document.querySelector('.floating-elements');
-        const HEART_COUNT = 12, DOT_COUNT = 12, FLORAL_COUNT = 12;
-        const fragHearts = document.createDocumentFragment();
-        for (let i = 0; i < HEART_COUNT; i++) {
-          const wrap = document.createElement('div'); wrap.className = 'floating-heart';
-          const x = Math.random() * 100, delay = (Math.random() * 2).toFixed(2) + 's', duration = (15 + Math.random() * 8).toFixed(2) + 's', drift = (Math.random() * 60 - 30).toFixed(0) + 'px';
-          wrap.style.setProperty('--x', x + 'vw'); wrap.style.setProperty('--drift', drift); wrap.style.animationDuration = duration; wrap.style.animationDelay = delay;
-          wrap.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="${getCSS('--heart-pink')}" d="M12 21s-1-.73-2.35-1.86C6.4 16.9 3 14.08 3 10.5 3 8.02 5.02 6 7.5 6c1.54 0 3.04.99 3.57 2.36h1.86C13.46 6.99 14.96 6 16.5 6 18.98 6 21 8.02 21 10.5c0 3.58-3.4 6.4-6.65 8.64C13 20.27 12 21 12 21z"/></svg>`;
-          fragHearts.appendChild(wrap);
-        }
-        container.appendChild(fragHearts);
-        for (let i = 0; i < DOT_COUNT; i++) {
-          const d = document.createElement('div'); d.className = 'particle-dot'; d.style.left = Math.random() * 100 + '%'; d.style.animationDelay = Math.random() * 3 + 's'; d.style.animationDuration = 6 + Math.random() * 6 + 's'; container.appendChild(d);
-        }
-        const svgs = [
-          `<svg viewBox='0 0 64 64' width='18' height='18' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='32' cy='32' r='6' fill='${getCSS('--flower-light')}'/><g fill='${getCSS('--flower')}' opacity='.9'><circle cx='16' cy='16' r='10'/><circle cx='48' cy='16' r='10'/><circle cx='16' cy='48' r='10'/><circle cx='48' cy='48' r='10'/></g></svg>`,
-          `<svg viewBox='0 0 64 64' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M8 56C22 34 42 22 56 8c0 0-8 26-48 48Z' fill='${getCSS('--leaf')}' opacity='.9'/><path d='M12 52c18-18 26-24 44-42' stroke='${getCSS('--leaf-stroke')}' stroke-width='2' opacity='.7'/></svg>`
-        ];
-        for (let i = 0; i < FLORAL_COUNT; i++) {
-          const wrap = document.createElement('div');
-          wrap.style.position = 'absolute'; wrap.style.willChange = 'transform, opacity';
-          const x = (Math.random() * 100).toFixed(2), delay = (Math.random() * 4).toFixed(2) + 's', duration = (18 + Math.random() * 8).toFixed(2) + 's', drift = (Math.random() * 80 - 40).toFixed(0) + 'px';
-          wrap.style.left = x + 'vw'; wrap.style.transform = 'translateY(110vh)'; wrap.style.opacity = '0.7'; wrap.innerHTML = svgs[Math.floor(Math.random() * svgs.length)];
-          container.appendChild(wrap);
-          wrap.animate([{ transform: `translate(${x}vw, 110vh)`, opacity: 0 }, { transform: `translate(calc(${x}vw + ${drift}), -10vh)`, opacity: .9 }], { duration: parseFloat(duration) * 1000, delay: parseFloat(delay) * 1000, iterations: Infinity, easing: 'linear' });
-        }
-      }
-      function getCSS(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
-
-      /* ---------- Section animations ---------- */
-      const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animate') }) }, { threshold: .1, rootMargin: '0px 0px -50px 0px' });
-      document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
-
-      /* ---------- RSVP submit + attendance toggle ---------- */
-      const rsvpForm = document.getElementById('rsvpForm');
-      const guestsGroup = document.getElementById('guestsGroup');
-      const guestsSelect = document.getElementById('guests');
-      const attendToggle = document.getElementById('attendToggle');
-      const attendingInput = document.getElementById('attending');
-
-      function updateGuestsRequirement() {
-        const attending = attendingInput.value;
-        if (attending === 'Yes') { guestsGroup.style.display = ''; guestsSelect.setAttribute('required', 'required') }
-        else { guestsGroup.style.display = 'none'; guestsSelect.removeAttribute('required'); guestsSelect.value = '' }
-      }
-      attendToggle.addEventListener('click', (e) => {
-        const btn = e.target.closest('.toggle-btn'); if (!btn) return;
-        attendingInput.value = btn.dataset.value;
-        attendToggle.querySelectorAll('.toggle-btn').forEach(b => { b.classList.toggle('is-active', b === btn); b.setAttribute('aria-pressed', b === btn ? 'true' : 'false') });
-        updateGuestsRequirement();
-      });
-      attendingInput.value = ''; updateGuestsRequirement();
-
-      rsvpForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        // Require attending toggle
-        if (!attendingInput.value) {
-          alert('Please let us know if you are attending.');
-          return;
-        }
-
-        // Compose full name
-        const first = (document.getElementById('firstName').value || '').trim();
-        const last = (document.getElementById('lastName').value || '').trim();
-        document.getElementById('fullName').value = [first, last].filter(Boolean).join(' ');
-
-        // UI: disable button while sending
-        const submitBtn = document.querySelector('.submit-btn');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '⏳ Submitting...';
-        submitBtn.disabled = true;
-
-        try {
-          // ---- SEND THE POST FIRST ----
-          const scriptURL = 'https://script.google.com/macros/s/AKfycbxHkzMlFNw5gc24yS2URoKRli10zicn4ls_vkQL2vGGCxYQyUDkP_ZV8MQHImvCMYpq/exec';
-          const data = Object.fromEntries(new FormData(this).entries());
-          data.timestamp = new Date().toISOString();
-          const body = new URLSearchParams(data).toString();
-
-          const res = await fetch(scriptURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-            body
-          });
-
-          if (!res.ok) throw new Error('Network response was not ok');
-
-          // ---- SUCCESS UI ----
-          const successMessage = document.getElementById('successMessage'); // define once here
-          const isAttending = attendingInput.value === 'Yes';
-
-          successMessage.innerHTML = isAttending
-            ? `
-          <h3>✨ Thank you!</h3>
-          <p>We’re thrilled you’ll be celebrating with us!</p>
-        `
-            : `
-          <h3>💛 We’ll miss you!</h3>
-          <p>Thanks for letting us know. We’ll share the photos and a video highlight reel after the wedding—keep an eye on your inbox for the link.</p>
-        `;
-
-          // Show message + hide form fields (CSS handles the hiding)
-          successMessage.style.display = 'block';
-          rsvpForm.classList.add('submitted');
-          requestAnimationFrame(() => successMessage.classList.add('show'));
-
-          // Fun confetti hearts
-          for (let i = 0; i < 10; i++) setTimeout(() => createCelebrationHeart(), i * 200);
-
-          // Reset underlying fields for any future edit
-          this.reset();
-          attendingInput.value = '';
-          attendToggle.querySelectorAll('.toggle-btn').forEach(b => {
-            b.classList.remove('is-active');
-            b.setAttribute('aria-pressed', 'false');
-          });
-          updateGuestsRequirement();
-
-        } catch (err) {
-          console.error(err);
-          alert('There was an error submitting your RSVP. Please try again or contact us directly.');
-        } finally {
-          // Restore button
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }
-      });
-
-      function createCelebrationHeart() {
-        const heart = document.createElement('div'); heart.innerHTML = '💖'; heart.style.position = 'fixed'; heart.style.left = Math.random() * 100 + 'vw'; heart.style.top = '100vh'; heart.style.fontSize = '2rem'; heart.style.zIndex = '10000'; heart.style.pointerEvents = 'none'; document.body.appendChild(heart);
-        heart.animate([{ transform: 'translateY(0) rotate(0deg)', opacity: 1 }, { transform: 'translateY(-100vh) rotate(360deg)', opacity: 0 }], { duration: 3000, easing: 'ease-out' }).onfinish = () => heart.remove();
-      }
-
-      /* ---------- Gallery + Lightbox navigation ---------- */
-      const gallery = document.getElementById('gallery');
-      const cards = [...gallery.querySelectorAll('.photo-card')];
-      // Lazy-load grid images
-      document.querySelectorAll('.photo-card img').forEach(img => img.setAttribute('loading', 'lazy'));
-
-      const images = cards.map(card => ({
-        src: card.querySelector('img').src,
-        alt: card.querySelector('img').alt,
-        caption: card.querySelector('.photo-overlay strong')?.textContent || card.querySelector('img').alt
-      }));
-
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightboxImg');
-      const lightboxClose = document.getElementById('lightboxClose');
-      const lightboxPrev = document.getElementById('lightboxPrev');
-      const lightboxNext = document.getElementById('lightboxNext');
-      const lightboxCaption = document.getElementById('lightboxCaption');
-
-      let currentIndex = 0;
-      const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
-
-    function openLightbox(index) {
-        if (isMobile()) return; // **Disable opening single photo on mobile**
-        currentIndex = index;
-        updateLightbox();
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        document.dispatchEvent(new CustomEvent('lightbox:open'));
-      }
-      function updateLightbox() { const item = images[currentIndex]; lightboxImg.src = item.src; lightboxImg.alt = item.alt; lightboxCaption.textContent = item.caption }
-      function closeLightbox() {
-          lightbox.classList.remove('open');
-          document.body.style.overflow = '';
-          document.dispatchEvent(new CustomEvent('lightbox:close'));
-        }
-      function showPrev() { currentIndex = (currentIndex - 1 + images.length) % images.length; updateLightbox() }
-      function showNext() { currentIndex = (currentIndex + 1) % images.length; updateLightbox() }
-
-      // Only open from grid (desktop/tablet)
-      gallery.addEventListener('click', (e) => { if (isMobile()) return; const card = e.target.closest('.photo-card'); if (!card) return; const index = cards.indexOf(card); if (index >= 0) openLightbox(index) });
-      lightboxClose.addEventListener('click', closeLightbox);
-      lightboxPrev.addEventListener('click', showPrev);
-      lightboxNext.addEventListener('click', showNext);
-      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox() });
-      document.addEventListener('keydown', (e) => { if (!lightbox.classList.contains('open')) return; if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowLeft') showPrev(); if (e.key === 'ArrowRight') showNext() });
-
-      // Swipe for lightbox
-      let touchStartX = 0;
-      lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX }, { passive: true });
-      lightbox.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - touchStartX; if (Math.abs(dx) > 40) dx > 0 ? showPrev() : showNext() }, { passive: true });
-
-      /* ---------- Viewport unit fix ---------- */
-      function handleViewportChange() { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`) }
-      window.addEventListener('resize', handleViewportChange);
-      window.addEventListener('orientationchange', handleViewportChange);
-      handleViewportChange();
-
-      createFloatingElements();
-
-      window.addEventListener('load', () => {
-        const cards = document.querySelectorAll('#gallery .photo-card');
-        cards.forEach((card, index) => { card.style.opacity = '0'; card.style.transform = 'translateY(30px)'; setTimeout(() => { card.style.transition = 'all 0.6s ease-out'; card.style.opacity = '1'; card.style.transform = 'translateY(0)' }, index * 100) });
-      });
-
-      /* ---------- Mobile carousel: captions + seamless loop, no lightbox ---------- */
-      (function initMobileCarousel() {
-        const mobileEl = document.getElementById('mobileCarousel'); if (!mobileEl) return;
-
-        function build() {
-          const mobile = isMobile();
-          if (!mobile) { mobileEl.hidden = true; return; }
-          if (mobileEl.dataset.built === '1') { mobileEl.hidden = false; return; }
-
-          const viewport = document.createElement('div'); viewport.className = 'carousel-viewport';
-          const track = document.createElement('div'); track.className = 'carousel-track';
-
-          // Build slides (real)
-          const makeSlide = (item) => {
-            const slide = document.createElement('div'); slide.className = 'carousel-slide';
-            const fig = document.createElement('figure'); fig.style.width = '100%'; fig.style.height = '100%'; fig.style.margin = '0';
-            const img = document.createElement('img'); img.src = item.src; img.alt = item.alt; img.loading = 'lazy'; img.decoding = 'async';
-            const cap = document.createElement('figcaption'); cap.className = 'slide-caption'; cap.textContent = item.caption;
-            fig.appendChild(img); fig.appendChild(cap); slide.appendChild(fig); return slide;
-          };
-
-          const realSlides = images.map(makeSlide);
-          const firstClone = makeSlide(images[0]); firstClone.dataset.clone = 'first';
-          const lastClone = makeSlide(images[images.length - 1]); lastClone.dataset.clone = 'last';
-
-          // Order: [lastClone, ...realSlides, firstClone]
-          track.appendChild(lastClone);
-          realSlides.forEach(s => track.appendChild(s));
-          track.appendChild(firstClone);
-
-          // Controls + dots
-          const prev = document.createElement('button'); prev.className = 'carousel-prev'; prev.setAttribute('aria-label', 'Previous'); prev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
-          const next = document.createElement('button'); next.className = 'carousel-next'; next.setAttribute('aria-label', 'Next'); next.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
-          viewport.appendChild(track); viewport.appendChild(prev); viewport.appendChild(next);
-
-          const dots = document.createElement('div'); dots.className = 'carousel-dots';
-          images.forEach((_, i) => { const dot = document.createElement('button'); dot.className = 'carousel-dot'; dot.type = 'button'; dot.setAttribute('aria-label', 'Go to slide ' + (i + 1)); dots.appendChild(dot); });
-
-          mobileEl.appendChild(viewport); mobileEl.appendChild(dots);
-          mobileEl.hidden = false; mobileEl.dataset.built = '1';
-
-          const dotEls = [...dots.children];
-          let idx = 1; // start at first real slide (after lastClone)
-          let timer = null;
-
-          function setTransform(withTransition = true) {
-            if (!withTransition) { track.style.transition = 'none'; }
-            track.style.transform = `translateX(-${idx * 100}%)`;
-            if (!withTransition) {
-              // force reflow then re-enable transition
-              void track.offsetHeight; track.style.transition = '';
-            }
-            // Fixed dot calculation - properly map track index to dot index
-            let dotIndex = 0;
-            if (idx === 0) {
-              // at lastClone, should show last dot
-              dotIndex = images.length - 1;
-            } else if (idx === images.length + 1) {
-              // at firstClone, should show first dot
-              dotIndex = 0;
-            } else {
-              // at real slide, idx-1 maps to dot
-              dotIndex = idx - 1;
-            }
-            dotEls.forEach((d, n) => d.classList.toggle('is-active', n === dotIndex));
-          }
-
-          function goTo(nextIdx) {
-            // Boundary checks to prevent infinite loops
-            if (nextIdx < 0) nextIdx = 0;
-            if (nextIdx > images.length + 1) nextIdx = images.length + 1;
-            idx = nextIdx;
-            setTransform(true);
-          }
-
-          function nextSlide() { goTo(idx + 1); }
-          function prevSlide() { goTo(idx - 1); }
-
-          // Seamless loop handling - fixed to prevent getting stuck
-          track.addEventListener('transitionend', () => {
-            if (idx === images.length + 1) {
-              // at firstClone, jump to first real slide
-              idx = 1;
-              setTransform(false);
-            } else if (idx === 0) {
-              // at lastClone, jump to last real slide
-              idx = images.length;
-              setTransform(false);
-            }
-          });
-
-          // Controls
-          next.addEventListener('click', nextSlide);
-          prev.addEventListener('click', prevSlide);
-          dotEls.forEach((d, i) => d.addEventListener('click', () => goTo(i + 1)));
-
-          // Swipe (doesn't block vertical scroll)
-          let startX = 0;
-          viewport.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX }, { passive: true });
-          viewport.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - startX; if (Math.abs(dx) > 40) dx > 0 ? prevSlide() : nextSlide() }, { passive: true });
-
-          // Autoplay
-          function start() { stop(); timer = setInterval(nextSlide, 4000); }
-          function stop() { if (timer) { clearInterval(timer); timer = null; } }
-          start();
-          [prev, next, viewport].forEach(el => el.addEventListener('pointerdown', stop));
-          document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
-
-          // Initial position
-          setTransform(true);
-        }
-
-        build();
-        window.addEventListener('resize', build);
-      })();
-    </script>
+  </section>
 
   <script>
-    // ---------- Fullscreen Invitation Overlay (fixed) ----------
+    /* ---------- Scroll progress ---------- */
+    window.addEventListener('scroll', () => {
+      const bar = document.querySelector('.scroll-progress-bar');
+      const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      bar.style.width = pct + '%';
+    });
+
+    /* ---------- Robust smooth scroll (fix) ---------- */
+    // Attach after DOM is ready, and use native smooth behavior.
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href^="#"], .cta-next').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const sel = a.getAttribute('data-target') || a.getAttribute('href');
+          if (!sel || sel === '#') return;
+          const target = document.querySelector(sel);
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+        });
+      });
+    });
+
+    /* ---------- Floating decorations ---------- */
+    function createFloatingElements() {
+      const container = document.querySelector('.floating-elements');
+      const HEART_COUNT = 12, DOT_COUNT = 12, FLORAL_COUNT = 12;
+      const fragHearts = document.createDocumentFragment();
+      for (let i = 0; i < HEART_COUNT; i++) {
+        const wrap = document.createElement('div'); wrap.className = 'floating-heart';
+        const x = Math.random() * 100, delay = (Math.random() * 2).toFixed(2) + 's', duration = (15 + Math.random() * 8).toFixed(2) + 's', drift = (Math.random() * 60 - 30).toFixed(0) + 'px';
+        wrap.style.setProperty('--x', x + 'vw'); wrap.style.setProperty('--drift', drift); wrap.style.animationDuration = duration; wrap.style.animationDelay = delay;
+        wrap.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="${getCSS('--heart-pink')}" d="M12 21s-1-.73-2.35-1.86C6.4 16.9 3 14.08 3 10.5 3 8.02 5.02 6 7.5 6c1.54 0 3.04.99 3.57 2.36h1.86C13.46 6.99 14.96 6 16.5 6 18.98 6 21 8.02 21 10.5c0 3.58-3.4 6.4-6.65 8.64C13 20.27 12 21 12 21z"/></svg>`;
+        fragHearts.appendChild(wrap);
+      }
+      container.appendChild(fragHearts);
+      for (let i = 0; i < DOT_COUNT; i++) {
+        const d = document.createElement('div'); d.className = 'particle-dot'; d.style.left = Math.random() * 100 + '%'; d.style.animationDelay = Math.random() * 3 + 's'; d.style.animationDuration = 6 + Math.random() * 6 + 's'; container.appendChild(d);
+      }
+      const svgs = [
+        `<svg viewBox='0 0 64 64' width='18' height='18' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='32' cy='32' r='6' fill='${getCSS('--flower-light')}'/><g fill='${getCSS('--flower')}' opacity='.9'><circle cx='16' cy='16' r='10'/><circle cx='48' cy='16' r='10'/><circle cx='16' cy='48' r='10'/><circle cx='48' cy='48' r='10'/></g></svg>`,
+        `<svg viewBox='0 0 64 64' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M8 56C22 34 42 22 56 8c0 0-8 26-48 48Z' fill='${getCSS('--leaf')}' opacity='.9'/><path d='M12 52c18-18 26-24 44-42' stroke='${getCSS('--leaf-stroke')}' stroke-width='2' opacity='.7'/></svg>`
+      ];
+      for (let i = 0; i < FLORAL_COUNT; i++) {
+        const wrap = document.createElement('div');
+        wrap.style.position = 'absolute'; wrap.style.willChange = 'transform, opacity';
+        const x = (Math.random() * 100).toFixed(2), delay = (Math.random() * 4).toFixed(2) + 's', duration = (18 + Math.random() * 8).toFixed(2) + 's', drift = (Math.random() * 80 - 40).toFixed(0) + 'px';
+        wrap.style.left = x + 'vw'; wrap.style.transform = 'translateY(110vh)'; wrap.style.opacity = '0.7'; wrap.innerHTML = svgs[Math.floor(Math.random() * svgs.length)];
+        container.appendChild(wrap);
+        wrap.animate([{ transform: `translate(${x}vw, 110vh)`, opacity: 0 }, { transform: `translate(calc(${x}vw + ${drift}), -10vh)`, opacity: .9 }], { duration: parseFloat(duration) * 1000, delay: parseFloat(delay) * 1000, iterations: Infinity, easing: 'linear' });
+      }
+    }
+
+    function getCSS(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+    /* ---------- Section animations ---------- */
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animate') }) }, { threshold: .1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
+
+    /* ---------- RSVP submit + attendance toggle ---------- */
+    const rsvpForm = document.getElementById('rsvpForm');
+    const guestsGroup = document.getElementById('guestsGroup');
+    const guestsSelect = document.getElementById('guests');
+    const attendToggle = document.getElementById('attendToggle');
+    const attendingInput = document.getElementById('attending');
+
+    function updateGuestsRequirement() {
+      const attending = attendingInput.value;
+      if (attending === 'Yes') { guestsGroup.style.display = ''; guestsSelect.setAttribute('required', 'required') }
+      else { guestsGroup.style.display = 'none'; guestsSelect.removeAttribute('required'); guestsSelect.value = '' }
+    }
+    attendToggle.addEventListener('click', (e) => {
+      const btn = e.target.closest('.toggle-btn'); if (!btn) return;
+      attendingInput.value = btn.dataset.value;
+      attendToggle.querySelectorAll('.toggle-btn').forEach(b => { b.classList.toggle('is-active', b === btn); b.setAttribute('aria-pressed', b === btn ? 'true' : 'false') });
+      updateGuestsRequirement();
+    });
+    attendingInput.value = ''; updateGuestsRequirement();
+
+    rsvpForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Require attending toggle
+      if (!attendingInput.value) {
+        alert('Please let us know if you are attending.');
+        return;
+      }
+
+      // Compose full name
+      const first = (document.getElementById('firstName').value || '').trim();
+      const last = (document.getElementById('lastName').value || '').trim();
+      document.getElementById('fullName').value = [first, last].filter(Boolean).join(' ');
+
+      // UI: disable button while sending with spinner
+      const submitBtn = document.querySelector('.submit-btn');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const originalText = btnText.innerHTML;
+
+      // Add spinner and update text
+      btnText.innerHTML = 'Submitting';
+      const spinner = document.createElement('div');
+      spinner.className = 'spinner';
+      submitBtn.appendChild(spinner);
+      submitBtn.disabled = true;
+
+      try {
+        // ---- SEND THE POST ----
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxHkzMlFNw5gc24yS2URoKRli10zicn4ls_vkQL2vGGCxYQyUDkP_ZV8MQHImvCMYpq/exec';
+        const data = Object.fromEntries(new FormData(this).entries());
+        data.timestamp = new Date().toISOString();
+        const body = new URLSearchParams(data).toString();
+
+        const res = await fetch(scriptURL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body
+        });
+
+        if (!res.ok) throw new Error('Network response was not ok');
+
+        // ---- SUCCESS UI ----
+        const successMessage = document.getElementById('successMessage');
+        const isAttending = attendingInput.value === 'Yes';
+
+        successMessage.innerHTML = isAttending
+          ? `
+        <h3>✨ Thank you!</h3>
+        <p>We're thrilled you'll be celebrating with us!</p>
+      `
+          : `
+        <h3>💛 We'll miss you!</h3>
+        <p>Thanks for letting us know. We'll share the photos and a video highlight reel after the wedding—keep an eye on your inbox for the link.</p>
+      `;
+
+        // Show message + hide form fields (CSS handles the hiding)
+        successMessage.style.display = 'block';
+        rsvpForm.classList.add('submitted');
+        requestAnimationFrame(() => successMessage.classList.add('show'));
+
+        // Fun confetti hearts
+        for (let i = 0; i < 10; i++) setTimeout(() => createCelebrationHeart(), i * 200);
+
+        // Reset underlying fields for any future edit
+        this.reset();
+        attendingInput.value = '';
+        attendToggle.querySelectorAll('.toggle-btn').forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        updateGuestsRequirement();
+
+      } catch (err) {
+        console.error(err);
+        alert('There was an error submitting your RSVP. Please try again or contact us directly.');
+      } finally {
+        // Restore button
+        btnText.innerHTML = originalText;
+        const spinner = submitBtn.querySelector('.spinner');
+        if (spinner) spinner.remove();
+        submitBtn.disabled = false;
+      }
+    });
+
+    function createCelebrationHeart() {
+      const heart = document.createElement('div'); heart.innerHTML = '💖'; heart.style.position = 'fixed'; heart.style.left = Math.random() * 100 + 'vw'; heart.style.top = '100vh'; heart.style.fontSize = '2rem'; heart.style.zIndex = '10000'; heart.style.pointerEvents = 'none'; document.body.appendChild(heart);
+      heart.animate([{ transform: 'translateY(0) rotate(0deg)', opacity: 1 }, { transform: 'translateY(-100vh) rotate(360deg)', opacity: 0 }], { duration: 3000, easing: 'ease-out' }).onfinish = () => heart.remove();
+    }
+
+    /* ---------- Viewport unit fix ---------- */
+    function handleViewportChange() { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`) }
+    window.addEventListener('resize', handleViewportChange);
+    window.addEventListener('orientationchange', handleViewportChange);
+    handleViewportChange();
+
+    createFloatingElements();
+  </script>
+
+  <script>
+    // ---------- Fullscreen Invitation Overlay (Auto-play on every visit) ----------
     (function initInviteOverlay() {
       const overlay = document.getElementById('inviteOverlay');
-      const rsvpBtn = document.getElementById('inviteRSVPBtn');
       const closeBtn = document.getElementById('inviteCloseBtn');
       const soundBtn = document.getElementById('inviteSoundBtn');
       const video = document.getElementById('inviteVideo');
-      const unmuteBtn = document.getElementById('inviteUnmuteBtn');
       const watchBtn = document.getElementById('watchInviteBtn');
+      const bottomRSVPBtn = document.getElementById('inviteBottomRSVP');
 
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1993,12 +1373,6 @@
         soundBtn.innerHTML = isMuted
           ? '<i class="fas fa-volume-mute" aria-hidden="true"></i><span>Unmute</span>'
           : '<i class="fas fa-volume-up" aria-hidden="true"></i><span>Mute</span>';
-
-        // bottom-right quick button
-        unmuteBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
-        unmuteBtn.innerHTML = isMuted
-          ? '<i class="fas fa-volume-mute"></i><span style="margin-left:6px;">Sound</span>'
-          : '<i class="fas fa-volume-up"></i><span style="margin-left:6px;">Sound</span>';
       }
 
       function setOverlayOriginFromButton(btn) {
@@ -2019,7 +1393,7 @@
 
         if (opening) {
           overlay.style.opacity = '0';
-          overlay.style.transform = 'scale(0.86)';        // smaller start = clearer “from button”
+          overlay.style.transform = 'scale(0.86)';
           overlay.classList.add('is-open');
           document.body.style.overflow = 'hidden';
           await overlay.animate(
@@ -2028,7 +1402,6 @@
             { duration: 320, easing: 'cubic-bezier(.2,.8,.2,1)' }
           ).finished;
         } else {
-          // collapse back into the button
           overlay.style.opacity = '1';
           overlay.style.transform = 'scale(1)';
           await overlay.animate(
@@ -2043,7 +1416,6 @@
         overlay.style.transform = '';
       }
 
-      // Open/close should ALWAYS reference the launcher button for origin
       async function openOverlay(fromBtn) {
         await animateOverlay(true, fromBtn || watchBtn);
         try { video.currentTime = 0; } catch { }
@@ -2054,9 +1426,6 @@
       async function closeOverlay({ scrollTo = null } = {}) {
         try { video.pause(); } catch { }
         await animateOverlay(false, watchBtn);
-
-        // Mark as seen on any manual close too
-        try { localStorage.setItem(HAS_SEEN_KEY, '1'); } catch { }
 
         if (scrollTo) {
           const el = document.querySelector(scrollTo);
@@ -2074,20 +1443,12 @@
         }
       });
 
-      unmuteBtn.addEventListener('click', async () => {
-        video.muted = !video.muted;
-        setSoundUI();
-        if (!video.muted) {
-          try { await video.play(); } catch { }
-        }
-      });
-
       video.addEventListener('volumechange', setSoundUI);
       video.addEventListener('loadedmetadata', setSoundUI);
 
       // --- Controls ---
       closeBtn.addEventListener('click', () => closeOverlay());
-      rsvpBtn.addEventListener('click', (e) => {
+      bottomRSVPBtn.addEventListener('click', (e) => {
         e.preventDefault();
         closeOverlay({ scrollTo: '#rsvp' });
       });
@@ -2095,53 +1456,24 @@
         if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeOverlay();
       });
       video.addEventListener('ended', () => {
-        // When video ends, close and show the launcher button  
         closeOverlay();
       });
 
       // Floating watch button
       watchBtn.addEventListener('click', () => openOverlay(watchBtn));
 
-      // --- Open overlay ONLY on the first visit ---
-      let autoOpened = false;
-      const HAS_SEEN_KEY = 'inviteSeen';
-
-      try {
-        const hasSeen = localStorage.getItem(HAS_SEEN_KEY) === '1';
-        if (!hasSeen) {
-          autoOpened = true;
-          // open once, then remember so the next refresh won't auto-play
-          openOverlay(watchBtn).then(() => {
-            try { localStorage.setItem(HAS_SEEN_KEY, '1'); } catch { }
-          });
-        } else {
-          // ensure the launcher is visible if they’ve already seen it
-          watchBtn.style.display = '';
-        }
-      } catch {
-        // If localStorage is unavailable, just behave like "seen"
-        watchBtn.style.display = '';
-      }
-
-      // Hide/show the floating "Watch invite video" button if the gallery lightbox is open on desktop
-      const isDesktop = () => !window.matchMedia('(max-width: 768px)').matches;
-
-      document.addEventListener('lightbox:open', () => {
-        if (isDesktop()) watchBtn.style.display = 'none';
-      });
-
-      document.addEventListener('lightbox:close', () => {
-        if (isDesktop()) {
-          // Only show it back if the invite overlay itself isn't open
-          const overlayOpen = document.getElementById('inviteOverlay')?.classList.contains('is-open');
-          watchBtn.style.display = overlayOpen ? 'none' : '';
-        }
+      // --- Auto-open on EVERY page load ---
+      window.addEventListener('load', () => {
+        // Small delay to ensure everything is loaded
+        setTimeout(() => {
+          openOverlay(watchBtn);
+        }, 500);
       });
 
       // Initial UI sync
       setSoundUI();
     })();
-
   </script>
-  </body>
-  </html>
+</body>
+
+</html>
